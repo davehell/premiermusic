@@ -1,0 +1,119 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li class="active">Halfplayback</li>
+</ol>
+{/block}
+
+{block content}
+<h1 n:block=title>Halfplayback s&nbsp;použitím živých kytar</h1>
+
+<p>
+  Vzhledem k&nbsp;tomu, že mi jako muzikantovi není lhostejný vývoj a&nbsp;způsob
+současné hudební produkce a&nbsp;především kvalita zvuku hudebních seskupení na
+akcích typu svatby, plesy, oslavy, karaoke apod., rozhodl jsem se své
+podklady šířit dál touto formou především pro neúplné kapely, které ocení
+zvukovou stránku mé práce.
+</p>
+<p>
+  Prodej přes e-shop mi umožní investovat do dalších nástrojů k&nbsp;tvorbě dalších
+podkladů. Na tuto myšlenku mě přivedli známí muzikanti, kteří zvuk mých
+podkladů velmi ocenili.
+</p>
+<p>
+  Nepoužívám standard midi, nahrávám vše osobně na vlastních nástrojích.
+Ukázky jsou v&nbsp;mp3, nahrávky k&nbsp;zakoupení jsou ve formátu wave.
+</p>
+<p>
+  Něco málo o&nbsp;mně: Hudba mě provází celý můj dosavadní život. Stran hudebního vzdělání: od
+absolvování LŠU - obory bicí, klavír, až po ukončenou konzervatoř - obor
+baskytara. Od mládí praxe v&nbsp;různých kapelách, i&nbsp;jako zaměstnanec Krajského
+kulturního střediska jsem hrál v&nbsp;baru, v&nbsp;lázních i&nbsp;na lodi, praxe i&nbsp;v
+zahraničí.
+</p>
+<p>
+  Postupně jsem si zařídil domácí studio, ve kterém vyrábím hudební podklady
+pro svou současnou kapelu či pro jiné na zakázku.
+</p>
+
+<p>
+  Lubomír Staš
+</p>
+
+<hr>
+
+<p>
+  V této sekci máte možnost zakoupit si hudební audio podklady, především pro nekompletní kapely, či pro kytaristy apod., kteří nechtějí či nemohou používat standard midi soubory.
+</p>
+<p>
+  Nahrávky vznikají v domácím studiu a většinou obsahují toto nástrojové obsazení: bicí, basa, klávesové nástroje. Dle požadavku možno objednat pouze základ - basa a bicí.
+</p>
+<p>
+  Další forma podkladů k prodeji je tzv. half playback - včetně akustické a elektrické kytary. Skladbu, kterou nenaleznete, je možno po dohodě vyrobit. Vhodné i na produkci karaoke, prozatím bez textu.
+</p>
+
+<p>
+  U názvu každé  skladby naleznete i  označení tóniny. Vysvětlivky zkratek u názvu skladby:
+</p>
+
+<ul>
+  <li>dr. - bicí</li>
+  <li>bs. - basa</li>
+  <li>pn. - piáno</li>
+  <li>hm. - varhany</li>
+  <li>bez kytar - větší osazení nástrojů, chybí pouze kytary</li>
+  <li>komplet - kompletní nástrojová nahrávka pro zpěv či karaoke</li>
+</ul>
+
+{if $user->isInRole('spravce')}
+<p>
+  <a n:href="Halfplayback:pridat" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Přidat skladbu</a>
+</p>
+{/if}
+
+{form hledaniForm class => ''}
+    <legend>Filtrování skladeb</legend>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Kategorie:</label>
+      {foreach $seznamKategorii as $id => $kategorie}
+        <label class="checkbox-inline">
+          <input n:name="kat{$id}:" /> {$kategorie}
+        </label>
+      {/foreach}
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2">
+        {input 'send'}
+        <a n:href="Halfplayback:" class="btn btn-primary">Zobrazit vše</a>
+      </div>
+    </div>
+{/form hledaniForm}
+
+{if $skladby->count()}
+  {control vp}
+  <table class="table table-striped table-hover vydavatelstvi">
+    <thead>
+      <tr>
+        <th>Ćíslo</th>
+        <th>Název</th>
+        <th>Popis</th>
+        <th>Verze</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr n:foreach="$skladby as $skladba">
+        <td>{$skladba->id}</td>
+        <td>
+        <a n:if="$skladba->soubor" n:href="Halfplayback:download, $skladba->id" class="btn btn-primary" title="Stáhnout mp3 demo skladby"><span class="glyphicon glyphicon-volume-up"></span></a>
+          <a n:href="Halfplayback:detail $skladba->id" title="detail skladby {$skladba->nazev}">{$skladba->nazev}</a>
+        </td>
+        <td>{$skladba->popis}</td>
+        <td>{$skladba->hudba_hpback_kategorie->nazev}</td>
+      </tr>
+    </tbody>
+  </table>
+{else}
+  <p>
+    Nejsou uloženy žádné skladby.
+  </p>
+{/if}

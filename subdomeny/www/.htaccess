@@ -5,10 +5,13 @@
 
 
 # enable cool URL
-
 	RewriteEngine On
+
+    Redirect 301 /halfplayback http://halfplayback.premiermusic.cz
+
 	RewriteCond %{HTTP_HOST} ^premiermusic.cz
-  RewriteRule (.*) http://www.premiermusic.cz/$1 [R=301,QSA,L]
+    RewriteRule (.*) http://www.premiermusic.cz/$1 [R=301,QSA,L]
+
 
   #na localu zakomentovat
   #RewriteBase /

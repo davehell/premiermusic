@@ -1,0 +1,29 @@
+
+# disable directory listing
+
+	Options -Indexes
+
+
+# enable cool URL
+
+	RewriteEngine On
+	RewriteCond %{HTTP_HOST} ^premiermusic.cz
+  RewriteRule (.*) http://www.premiermusic.cz/$1 [R=301,QSA,L]
+
+  #na localu zakomentovat
+  #RewriteBase /
+
+	# prevents files starting with dot to be viewed by browser
+	RewriteRule /\.|^\. - [F]
+
+	# front controller
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
+
+
+# enable gzip compression
+
+	#AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json
+
+

@@ -1,6 +1,7 @@
 **/log/*
 **/temp/*
 **/vendor/*
+**/data/*
 !.gitignore
 !.htaccess
 **/config.local.neon
