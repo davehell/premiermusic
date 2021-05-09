@@ -1,0 +1,20 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:">Úvod</a></li>
+  <li><a n:href="Agentura:">Hudební agentura</a></li>
+  <li class="active">Zveřejnění kapely</li>
+</ol>
+{/block}
+
+{block scripts}
+<script>
+  $( "input[name='antiSpam']" ).closest( "div.form-group" ).css( "display", "none" );
+  $( "input[name='antiSpam']" ).val("6");
+</script>
+{/block}
+
+{block content}
+<h1 n:block=title>Hudební agentura</h1>
+
+<h2>Objednávka zveřejnění kapely</h2>
+{control poptavkaForm}

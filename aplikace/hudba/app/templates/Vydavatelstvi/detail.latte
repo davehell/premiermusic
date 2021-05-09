@@ -1,0 +1,60 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:">Úvod</a></li>
+  <li><a n:href="Vydavatelstvi:">Hudební vydavatelství</a></li>
+  <li class="active">Objednávka</li>
+</ol>
+{/block}
+
+{block scripts}
+<script>
+  $( "input[name='antiSpam']" ).closest( "div.form-group" ).css( "display", "none" );
+  $( "input[name='antiSpam']" ).val("6");
+</script>
+{/block}
+
+{block content}
+<h1 n:block=title>Noty &bdquo;{$noty->nazev}&ldquo;</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <dl class="dl-horizontal">
+      <dt>Název</dt>
+      <dd>{$noty->nazev}</dd>
+      <dt>Popis</dt>
+      <dd>{$noty->popis}</dd>
+      <dt>Cena</dt>
+      <dd>
+        <p>
+          <strong>{$noty->cena}&nbsp;Kč</strong>
+        </p>
+      </dd>
+    </dl>
+  </div>
+  <div class="col-md-6">
+    <form class="well">
+      <label>Ukázky ke stažení</label>
+      <ul>
+        <li n:if="$noty->foto"><a href="{$basePath}/img/data/vydavatelstvi/{$noty->foto}" data-lightbox="group{$noty->id}">ukázka not</a></li>
+        <li n:if="$noty->soubor_id" ><a n:href="Vydavatelstvi:download, $noty->soubor_id">mp3 demo skladby</a></li>
+      </ul>
+    </form>
+  </div>
+</div>
+
+
+<h2>
+  Objednávkový formulář
+</h2>
+<p>
+  Při dodání not elektronicky ve formátu .pdf probíhá platba převodem na účet. Při dodání v&nbsp;tištěné formě na adresu objednatele se platí dobírkou. <br>
+  Po přijetí objednávky zašlu potvrzující email.
+</p>
+{control nakupForm}
+
+
+{if $user->isInRole('admin')}
+  <h2>Editace not</h2>
+  <a n:href="Vydavatelstvi:smazat, $noty->id" class="btn btn-danger" onclick="return confirm('Opravdu smazat?')"><span class="glyphicon glyphicon-remove"></span> Smazat</a>
+  {control cdForm}
+{/if}

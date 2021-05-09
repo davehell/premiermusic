@@ -1,0 +1,101 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li><a n:href="Skladba:default radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null">MIDI a karaoke</a></li>
+  <li class="active">Katalog skladeb</li>
+</ol>
+{/block}
+
+{block scripts}
+  <script>
+    $('#frm-hledaniForm-nazev').typeahead({
+      prefetch: {
+        url:  '{$basePath|noescape}/skladby.json'
+      },
+      limit: 10
+    });
+
+    $('#frm-hledaniForm-autor').typeahead({
+      prefetch: {
+        url:  '{$basePath|noescape}/autori.json'
+      },
+      limit: 10
+    });
+  </script>
+{/block}
+
+{block content}
+
+<h1 n:block=title>Katalog skladeb</h1>
+ 
+{if $adminMode}
+  <p>
+    <a n:href="Skladba:pridat" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Nová skladba</a>
+  </p>
+{/if}
+
+
+<div class="row hidden-print">
+  <div class="col-sm-6">
+    <div id="hledaniForm-wrapper" class="well">
+      <h3>Vyhledávání</h3>
+      {control hledaniForm}
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <h3>Výroba hudebních podkladů na zakázku</h3>
+
+    <p>
+      Pokud Vámi požadovaná píseň není v katalogu skladeb, zhotovím ji na zakázku. Cena se pohybuje od 300 do 1000&nbsp;Kč podle složitosti a náročnosti skladby. V ceně jsou zahrnuty autorské poplatky pro OSA.
+    </p>
+
+    <p>
+      Skladby dodávám v těchto formátech:
+    </p>
+
+    <ul>
+      <li><a n:href="KaraokeNaDvd:default">Karaoke na DVD <span class="glyphicon glyphicon-question-sign"></span></a> </li>
+      <li n:foreach="$formaty as $format">{$format}</li>
+    </ul>
+  </div>
+</div>
+
+{control vp}
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th class="col-md-3"><a n:href="Skladba:katalog radit => nazev, asc => ($razeniSloupec == 'nazev' && $razeniAsc) ? 0 : 1">název</a>
+      {if $razeniSloupec == 'nazev'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th class="col-md-3"><a n:href="Skladba:katalog radit => autor, asc => ($razeniSloupec == 'autor' && $razeniAsc) ? 0 : 1">interpret</a>
+      {if $razeniSloupec == 'autor'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th><a n:href="Skladba:katalog radit => cena, asc => ($razeniSloupec == 'cena' && $razeniAsc) ? 0 : 1">cena</a>
+      {if $razeniSloupec == 'cena'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th><a n:href="Skladba:katalog radit => verze, asc => ($razeniSloupec == 'verze' && $razeniAsc) ? 0 : 1">verze</a>
+      {if $razeniSloupec == 'verze'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th><a n:href="Skladba:katalog radit => zanr_id, asc => ($razeniSloupec == 'zanr_id' && $razeniAsc) ? 0 : 1">žánr</a>
+      {if $razeniSloupec == 'zanr_id'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {if $adminMode}
+      <th><a n:href="Skladba:katalog radit => datum_pridani, asc => ($razeniSloupec == 'datum_pridani' && $razeniAsc) ? 0 : 1">přidáno</a>
+      {if $razeniSloupec == 'datum_pridani'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th><a n:href="Skladba:katalog radit => pocet_stazeni, asc => ($razeniSloupec == 'pocet_stazeni' && $razeniAsc) ? 0 : 1">stažení</a>
+      {if $razeniSloupec == 'pocet_stazeni'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {/if}
+    </tr>
+  </thead>
+  <tbody>
+    <tr n:foreach="$skladby as $skladba">
+      <td>
+        <a n:href="Skladba:detail $skladba->id, radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null">{$skladba->nazev}</a>
+      </td>
+      <td>{$skladba->autor}</td>
+      <td>{$skladba->cena}&nbsp;Kč</td>
+      <td>{$skladba->verze}</td>
+      <td>{$skladba->zanr->nazev}</td>
+      {if $adminMode}
+      <td>{$skladba->datum_pridani|date:'%d.%m.%Y'}</td>
+      <td>{$skladba->pocet_stazeni}</td>
+      {/if}
+    </tr>
+  </tbody>
+</table>

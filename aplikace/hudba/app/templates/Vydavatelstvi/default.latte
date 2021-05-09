@@ -1,0 +1,90 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:">Úvod</a></li>
+  <li class="active">Hudební vydavatelství</li>
+</ol>
+{/block}
+
+{block scripts}
+<script>
+  $(function () {
+    $("[data-toggle='popover']").popover( { trigger: "hover", html: true } );
+  });
+</script>
+{/block}
+
+{block content}
+<h1 n:block=title>Hudební vydavatelství</h1>
+
+{if $user->isInRole('admin')}
+<p>
+  <a n:href="Vydavatelstvi:pridat" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Přidat noty</a>
+</p>
+{/if}
+
+<p>
+  Nabídka not lidových písniček v&nbsp;aranži pro dechový orchestr. Opisování a&nbsp;výroba not na zakázku.
+</p>
+<p>
+  Noty je možno zaslat e-mailem ve formátu PDF, nebo poštou ve fromátu A4 na dobírku. Poštovné hradí objednatel.
+</p>
+
+<p>
+  Obsazení nástrojů je možne na přání upravit pro jakékoliv hlasy, např. doprovod místo B trubky, pro pozoun, Es trubku apod.
+</p>
+
+{form hledaniForm class => ''}
+    <legend>Filtrování skladeb</legend>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Kategorie:</label>
+        <div class="col-sm-offset-2">
+      {foreach $kategorie as $kat}
+        <label class="checkbox-inline">
+          <input n:name="kat{$kat->id}:" /> {$kat->nazev}
+          <span class="glyphicon glyphicon-question-sign" data-toggle="popover" title="{$kat->nazev} - obsazení" data-content="{$kat->obsazeni}"></span>
+        </label><br>
+      {/foreach}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2">
+        {input 'send'}
+        <a n:href="Vydavatelstvi:" class="btn btn-primary">Zobrazit vše</a>
+      </div>
+    </div>
+{/form hledaniForm}
+
+{if $noty->count()}
+  {control vp}
+  <table class="table table-striped table-hover vydavatelstvi">
+    <thead>
+      <tr>
+        <th>Ćíslo</th>
+        <th>Název</th>
+        <th>Popis</th>
+        <th>Kategorie</th>
+        <th>Cena</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr n:foreach="$noty as $nota">
+        <td>{$nota->id}</td>
+        <td>
+          <div class="buttons">
+            <a n:if="$nota->foto" href="{$basePath}/img/data/vydavatelstvi/{$nota->foto}" class="btn btn-primary" data-lightbox="group{$nota->id}" title="Zobrazit ukázku not"><span class="glyphicon glyphicon-music"></span></a>
+            <a n:if="$nota->soubor_id" n:href="Vydavatelstvi:download, $nota->soubor_id" class="btn btn-primary" title="Stáhnout mp3 demo skladby"><span class="glyphicon glyphicon-volume-up"></span></a>
+          </div>
+          <a n:href="Vydavatelstvi:detail $nota->id">{$nota->nazev}</a>
+        </td>
+        <td>{$nota->popis}</td>
+        <td>{$nota->hudba_noty_kategorie->zkratka}</td>
+        <td>{$nota->cena}&nbsp;Kč</td>
+      </tr>
+    </tbody>
+  </table>
+{else}
+  <p>
+    Nejsou uloženy žádné noty.
+  </p>
+{/if}

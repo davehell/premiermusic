@@ -1,0 +1,41 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li class="active">Prodej CD</li>
+</ol>
+{/block}
+
+{block content}
+
+<h1 n:block="title">Prodej CD</h1>
+
+<p>
+  CD je zasíláno poštou. Termín expedice do 5 dnů od objednání.
+</p>
+
+<p>
+ Při zaslání CD na dobírku hrazenou objednatelem je <strong>poštovné 83&nbsp;Kč</strong>. <br />
+ Při platbě předem na účet {$cisloUctu} na základě vystavené faktury je <strong>poštovné 17&nbsp;Kč</strong>. Ihned po obdržení platby je odeslano jako dopis.
+</p>
+
+<p>
+  
+</p>
+
+
+{foreach $seznamCd as $cd}
+  <div class="media">
+    <a class="media-object pull-left" href="{$basePath}/img/data/cd/{$cd->foto}" data-lightbox="group{$cd->id}">
+      <img n:if="$cd->foto"  src="{$basePath}/img/data/cd/thumb-{$cd->foto}" width="100px" height="100px">
+    </a>
+    <div class="media-body">
+      <h3 class="media-heading">{$cd->nazev}</h3>
+      <p>
+        <strong>cena: {$cd->cena}&nbsp;Kč</strong>
+        <a n:href="prodejCd:detail, $cd->id" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Objednat CD</a>
+      </p>
+      {!$cd->popis}
+    </div>
+  </div>
+  <hr>
+{/foreach}

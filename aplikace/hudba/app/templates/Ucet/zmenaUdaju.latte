@@ -1,0 +1,31 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li><a n:href="Skladba:default">MIDI a karaoke</a></li>
+  <li><a n:href="Ucet:informace">Zákaznický účet</a></li>
+  <li class="active">Změna údajů</li>
+</ol>
+{/block}
+
+{block scripts}
+<script>
+  $( "input[name='antiSpam']" ).closest( "div.form-group" ).css( "display", "none" );
+  $( "input[name='antiSpam']" ).val("6");
+</script>
+{/block}
+
+{block content}
+<h1 n:block=title>Změna údajů</h1>
+
+<p>
+ Prosím vyplňte všechny požadované údaje.
+</p>
+<p>
+ Na zadanou e-mailovou adresu Vám bude zasíláno potvrzení o nákupu skladby a o nabití kreditu.
+</p>
+
+
+
+{control uzivatelForm }
+
+

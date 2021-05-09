@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule .* http://www.premiermusic.cz/midi-a-karaoke [R=301]

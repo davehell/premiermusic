@@ -1,0 +1,106 @@
+/* hlavicka */
+#header {
+  background-color: #fff;
+  border-bottom: 2px solid #CED8EA;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
+  color: #4171C6;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+}
+
+
+/* jumbotron panel */
+#jumbo {
+  padding: 30px 15px;
+  margin-top: 0;
+
+  background-image: -webkit-gradient(
+  	linear,
+  	left top,
+  	right top,
+  	color-stop(0, #FFFFFF),
+  	color-stop(0.73, #EDF1FA),
+  	color-stop(1, #FFFFFF)
+  );
+  background-image: -o-linear-gradient(right, #FFFFFF 0%, #EDF1FA 73%, #FFFFFF 100%);
+  background-image: -moz-linear-gradient(right, #FFFFFF 0%, #EDF1FA 73%, #FFFFFF 100%);
+  background-image: -webkit-linear-gradient(right, #FFFFFF 0%, #EDF1FA 73%, #FFFFFF 100%);
+  background-image: -ms-linear-gradient(right, #FFFFFF 0%, #EDF1FA 73%, #FFFFFF 100%);
+  background-image: linear-gradient(to right, #FFFFFF 0%, #EDF1FA 73%, #FFFFFF 100%);
+}
+
+#jumbo h2 {
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: #4171C6;
+}
+
+#jumbo a>span {
+  margin-right: 10px;
+}
+
+/* boxy */
+.box {
+  border-top: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+  border-bottom: 10px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  min-height: 170px;
+}
+#ucto.box {
+  border-right: none;
+  border-bottom-color: #CF3962;
+  border-radius: 6px 0 0 6px;
+
+}
+#dane.box {
+  border-right: none;
+  border-bottom-color: #FF8C00;
+}
+#eko.box {
+  border-right: none;
+  border-bottom-color: #E33A34;
+}
+#pivo.box {
+  border-bottom-color: #F1AA18;
+  border-radius: 0 6px 6px 0;
+}
+.box h4 {
+  text-align: center;
+  color: #4171C6;
+}
+.box ul{
+  padding-left: 20px;
+}
+.box button{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+/* sluzby */
+#sluzby .panel {border: none;}
+.tile {
+  background-color: #ECF1FA;
+  padding: 10px;
+  border: 1px solid #CED8EA;
+  margin-top: 20px;
+}
+.tile h3 {
+  color: #4171C6;
+  text-align: center;
+}

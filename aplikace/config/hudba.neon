@@ -1,0 +1,11 @@
+services:
+	- Bazar
+	- Agentura
+	- Vydavatelstvi
+	- Halfplayback
+	- UserManager
+	- Skladba
+	- Uzivatel
+	- Dvd
+	- Cd
+	- Kurz

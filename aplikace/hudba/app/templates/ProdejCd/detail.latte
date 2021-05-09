@@ -1,0 +1,42 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li><a n:href="ProdejCd:default">Prodej CD</a></li>
+  <li class="active">Objednávka CD</li>
+</ol>
+{/block}
+
+{block scripts}
+<script>
+  $( "input[name='antiSpam']" ).closest( "div.form-group" ).css( "display", "none" );
+  $( "input[name='antiSpam']" ).val("6");
+</script>
+{/block}
+
+{block content}
+<h1 n:block=title>CD &bdquo;{$cd->nazev}&ldquo;</h1>
+
+<div class="row">
+  <div class="col-md-7">
+    {!$cd->popis}
+    <h2>
+      Objednávkový formulář
+    </h2>
+    <p>
+      <strong>Název CD:</strong> {$cd->nazev}
+    </p>
+    <p>
+      <strong>Cena za kus:</strong> {$cd->cena}&nbsp;Kč
+    </p>
+    {control nakupForm}
+  </div>
+
+  <div class="col-md-5">
+      <img n:if="$cd->foto" class="media-object pull-left" src="{$basePath}/img/data/cd/{$cd->foto}" width="400px" height="400px">
+  </div>
+</div>
+
+<style type="text/css">
+table { display: none; }
+</style>
+
