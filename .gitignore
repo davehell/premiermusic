@@ -1,0 +1,7 @@
+**/log/*
+**/temp/*
+**/vendor/*
+!.gitignore
+!.htaccess
+**/config.local.neon
+rbvl.sublime*

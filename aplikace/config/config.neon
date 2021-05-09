@@ -22,7 +22,5 @@ nette:
 		dsn: 'mysql:host=mysql5-3;dbname=midi_1279320'
 		user: midi.1279320
 		password: X2u5ReXj
-
 	session:
 		expiration: 60 minutes
-
