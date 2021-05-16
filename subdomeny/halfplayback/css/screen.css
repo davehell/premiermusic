@@ -41,7 +41,7 @@ html,body {
 }
 
 #header2 {
-  min-height: 100px;
+  min-height: 150px;
   padding-top: 10px;
   background: #62B0CE url(../img/bg.jpg) no-repeat center top;
 }
@@ -56,9 +56,8 @@ html,body {
   color: #444;
   line-height: 24px;
   font-size: 39px;
-  padding: 5px 10px 10px 250px;
-  background: url(../img/logo.png) 0 5px no-repeat;
-
+  padding: 15px 10px 100px 400px;
+  background: url(../img/logo-hpb.jpg) 0 5px no-repeat;
 }
 
 #header2 h1 span{
