@@ -60,7 +60,7 @@ class Skladba extends Nette\Object
   /** @return array */
 	public function seznamFormatu($demo = null)
 	{
-    return $this->database->table('format')->where('demo', $demo == 'demo' ? 1 : 0)->fetchPairs('id', 'nazev');
+    return $this->database->table('format')->where('demo', $demo == 'demo' ? 1 : 0)->where('aktivni', 1)->fetchPairs('id', 'nazev');
 	}
 
 
