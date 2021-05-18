@@ -5,4 +5,4 @@
 !.gitignore
 !.htaccess
 **/config.local.neon
-rbvl.sublime*
+premier.sublime*

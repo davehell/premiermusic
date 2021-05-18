@@ -32,6 +32,7 @@ if (function_exists('apache_get_modules') && in_array('mod_rewrite', apache_get_
 	$router[] = new Route('index.php', 'Sluzby:default', Route::ONE_WAY);
   $router[] = new Route('kontakt', 'Sluzby:kontakt');
   $router[] = new Route('midi-a-karaoke', 'Skladba:default');
+  $router[] = new Route('vlastni-tvorba', 'Tvorba:default');
 	$router[] = new Route('<presenter>/<action>[/<id>]', 'Sluzby:default');
 } else {
  	$container->addService('router', new SimpleRouter('Sluzby:default'));

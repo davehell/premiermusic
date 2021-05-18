@@ -7,5 +7,5 @@ services:
 	- Skladba
 	- Uzivatel
 	- Dvd
-	- Cd
+	- Tvorba
 	- Kurz
