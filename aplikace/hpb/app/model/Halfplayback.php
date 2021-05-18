@@ -21,7 +21,7 @@ class Halfplayback extends Nette\Object
       $result->where("hudba_hpback_kategorie_id", $kategorie);
     }
 
-    $result->order('id DESC')
+    $result->order('nazev ASC')
            ->limit($limit, $offset);
 
     return $result;
