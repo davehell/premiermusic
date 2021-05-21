@@ -9,8 +9,6 @@ use Nette\Application\Responses\FileResponse,
 class HalfplaybackPresenter extends BasePresenter
 {
 
-	/** @var Vydavatelstvi @inject*/
-	public $vydavatelstvi;
 	/** @var Halfplayback @inject*/
 	public $halfplayback;
 
