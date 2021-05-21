@@ -24,9 +24,13 @@
 
 {if $items->count()}
   {foreach $items as $item}
-    <div class="media">
-      <div class="media-body">
-        <h3 class="media-heading">{$item->nazev}</h3>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>{$item->nazev}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
         {if $user->isInRole('admin')}
           <p>
             <a n:href="Tvorba:detail, $item->id" class="btn btn-danger"><span class="glyphicon glyphicon-pencil"></span> Upravit</a>
@@ -44,10 +48,11 @@
           <dt>Text</dt>
           <dd>{$item->text}</dd>
         </dl>
+      </div>
+      <div class="col-sm-6 col-md-8">
         {$item->url|noescape}
       </div>
     </div>
-    <hr>
   {/foreach}
 {else}
   <p>
