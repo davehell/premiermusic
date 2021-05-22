@@ -339,7 +339,8 @@ class UcetPresenter extends BasePresenter
       $this->redirect('Ucet:prihlaseni');
     }
 
-    $this->template->nakupy = $this->uzivatele->zakoupeneSkladby($this->user->id);
+    $this->template->nakupyMidi = $this->uzivatele->zakoupeneSkladby($this->user->id, "midi");
+    $this->template->nakupyFlasinet = $this->uzivatele->zakoupeneSkladby($this->user->id, "flasinet");
   }
 
   public function renderObnoveniHesla($email, $token)

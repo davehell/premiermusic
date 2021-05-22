@@ -1,0 +1,76 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li><a n:href="Flasinet:default">MIDI a karaoke</a></li>
+  <li class="active">Jak nakupovat</li>
+</ol>
+{/block}
+
+{block content}
+
+<h1 n:block="title">Jak nakupovat</h1>
+
+<h2>1. Založení Vašeho konta</h2>
+<p>
+  Vaše konto bude založeno po vyplnění <a n:href="Ucet:registrace">registračního formuláře</a>. Na e-mail zadaný při registraci Vám bude zasíláno potvrzení o nákupu skladby a potvrzení o nabití kreditu s údaji potřebnými pro platbu.
+</p>
+
+<p>
+  Po registraci a následném přihlášení do systému si můžete prohlížet údaje o <a n:href="Ucet:informace">Vašem účtu</a>.
+</p>
+
+<p>
+  Máte možnost:
+</p>
+<ul>
+  <li>Změnit Vaše přístupové údaje.</li>
+  <li>Zjistit aktuální výši kreditu, historii dobíjení kreditu nebo zaslat požadavek o <a n:href="Ucet:kredit">navýšení kreditu</a>.</li>
+  <li>Získat informace o <a n:href="Ucet:nakupy">zakoupených skladbách</a> případně je opětovně stáhnout.</li>
+</ul>
+
+<h2>2. Nabití kreditu</h2>
+<p>
+  Nákup skladeb na našem serveru probíhá odečtením ceny skladby z Vašeho kreditového účtu. To znamená, že před stažením skladby musíte mít nabitý kredit v dostatečné výši.
+</p>
+
+<p>
+  V <a n:href="Ucet:kredit">dobíjecím formuláři</a> zadejte částku, o kterou chcete navýšit kredit. Po stisknutí tlačítka "Nabít kredit" na se Vám zobrazí stránka se shrnutím transkace, ze které se dozvíte všechny údaje potřebné pro platbu. Zároveň bude na Vaši adresu zaslán potvrzující e-mail.
+</p>
+
+<p>
+  Po obdržení peněz Vám bude navýšen kredit. O této skutečnosti budete informováni e-mailem. Po připsání kreditu na Váš účet již můžete stahovat skladby.
+</p>
+
+<p>
+  Peníze je možné zasílat těmito způsoby:
+</p>
+<ul>
+  <li>Bankovním převodem (CZK) na účet č. {$cisloUctu}</li>
+  <li>Bankovním převodem (EUR) na účet č. 2000958904/20100
+    <ul>
+      <li>IBAN: CZ4120100000002000958904</li>
+      <li>SWIFT: FIOBCZPPXXX</li>
+      <li>Název účtu: Ing. Lubomir Piskor</li>
+      <li>Platbu ze slovenské banky zadejte jako vnitrostátní platbu (ne zahraniční), takto se vyhnete placení bankovních poplatků ve vaší bance. Do čísla účtu zadejte IBAN CZ4120100000002000958904.</li>
+    </ul>
+  </li>
+  <li>Poštovní poukázkou - adresa je uvedena v <a n:href="Sluzby:kontakt">kontaktech</a></li>
+</ul>
+
+<p>Pro zákazníky ze Slovenska a platbu v EUR patí, že cenu v eurech pronásobí platným kurzem v den dobití kreditu a kredit dobijí v Kč.
+Částku v Kč zaokrouhlí matematicky na celé koruny. Do 0,5 haléřu dolů, nad 0,5 haléřů nahoru.
+<a href="http://www.cnb.cz/cs/index.html" title="aktuální kurzy na stránkách České národní banky">Platný kurz zde</a></p>
+
+
+<h2>3. Stažení skladby</h2>
+<p>
+  Požadovanou skladbu si můžete vybrat v <a n:href="Flasinet:katalog">katalogu skladeb</a>. Pro nalezení konkrétní skladby můžete využít vyhledávání skladeb.
+</p>
+
+<p>
+  Pokud si tuto skladbu budete chtít koupit, učiníte tak stiskem tlačítka "Koupit skladbu". Jestliže máte nabitý kredit v dostatečné výši, bude Vám z něj odečtena cena za skladbu. Poté bude na Vaši emailovou adresu zasláno potvrzení o nákupu a odkaz na stažení zakoupené skladby.
+</p>
+
+<p>
+  Platnost odkazu na stažení není časově omezena. Jednou zaplacené skladby tedy můžete stahovat stále znovu. Přehled všech zakoupených skladeb i s odkazy na jejich stažení najdete ve <a n:href="Ucet:nakupy">Vašem účtu</a>.
+</p>

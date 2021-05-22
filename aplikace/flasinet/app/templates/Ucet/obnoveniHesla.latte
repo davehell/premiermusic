@@ -1,0 +1,13 @@
+<li>{var $robots = noindex}
+
+{block content}
+<h1 n:block=title>Obnovení hesla</h1>
+
+<dl class="dl-horizontal">
+  <dt>Uživatelské jméno:</dt>
+  <dd>{$uziv->login}</dd>
+  <dt>E-mail:</dt>
+  <dd>{$uziv->email}</dd>
+</dl>
+
+{control obnovaHeslaForm }</li>
