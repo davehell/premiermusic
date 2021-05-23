@@ -1,0 +1,47 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li><a n:href="Ucet:informace">Zákaznický účet</a></li>
+  <li class="active">Požadavek na dobití kreditu</li>
+</ol>
+{/block}
+
+{block content}
+<h1 n:block=title>Dobíjení kreditu - shrnutí transakce</h1>
+
+
+<dl class="dl-horizontal">
+  <dt>uživatelské jméno:</dt>
+  <dd>{$user->getIdentity()->data['login']}</dd>
+  <dt>požadavek přijat:</dt>
+  <dd>{$transakce->datum|date:'%d.%m.%Y'}</dd>
+  <dt>částka:</dt>
+  <dd>{$transakce->castka}&nbsp;Kč</dd>
+  <dt>číslo účtu (CZK):</dt>
+  <dd>{$cisloUctu}</dd>
+  <dt>číslo účtu (EUR):</dt>
+  <dd>
+    2000958904/20100
+    <ul>
+      <li>IBAN: CZ4120100000002000958904</li>
+      <li>SWIFT: FIOBCZPPXXX</li>
+      <li>Název účtu: Ing. Lubomír Piskoř</li>
+    </ul>
+  </dd>
+  <dt>variabilní symbol:</dt>
+  <dd>{$transakce->vs}</dd>
+</dl>
+
+<p>
+ Peníze je možné zasílat těmito způsoby:
+</p>
+
+<ul>
+  <li>Bankovním převodem</li>
+  <li>Poštovní poukázkou - adresa je uvedena v <a n:href=Sluzby:kontakt>kontaktech</a></li>
+</ul>
+
+<p>
+Kredit Vám bude navýšen po obdržení platby. O této skutečnosti budete informováni
+e-mailem. Po připsání kreditu na Váš účet již můžete stahovat skladby.
+</p>

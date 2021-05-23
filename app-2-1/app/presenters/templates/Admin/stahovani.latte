@@ -1,0 +1,97 @@
+{block scripts}
+  <script src="{$basePath}/js/datepicker.js"></script>
+
+  <script>
+    var obdobiOd = $('#frm-obdobiForm-zacatek').datepicker({ format: 'dd.mm.yyyy' }).on('changeDate', function(ev) {
+      obdobiOd.hide();
+    }).data('datepicker');
+
+    var obdobiDo = $('#frm-obdobiForm-konec').datepicker({ format: 'dd.mm.yyyy' }).on('changeDate', function(ev) {
+      obdobiDo.hide();
+    }).data('datepicker');
+  </script>
+{/block}
+
+
+{block content}
+
+<h1 n:block=title>Stahování</h1>
+
+{control obdobiForm}
+<hr>
+
+<div class="row">
+{if $zacatek && $konec}
+  <div class="col-md-6">
+    <h2>MIDI a karaoke</h2>
+    {if $nakupyMidi->count()}
+    <a n:href="Admin:stahovaniDownload $zacatek, $konec, 'midi', raditS=>null, asc=>null" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> uložit jako excel</a>
+
+    {control vp}
+
+    <table class="table table-striped table-hover table-condensed">
+      <thead>
+        <tr>
+          <th class="col-md-3"><a n:href="Admin:stahovani raditS => nazev, asc => ($razeniSloupec == 'nazev' && $razeniAsc) ? 0 : 1">název</a>
+          {if $razeniSloupec == 'nazev'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+          <th class="col-md-3"><a n:href="Admin:stahovani raditS => autor, asc => ($razeniSloupec == 'autor' && $razeniAsc) ? 0 : 1">interpret</a>
+          {if $razeniSloupec == 'autor'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+          <th><a n:href="Admin:stahovani raditS => cena, asc => ($razeniSloupec == 'cena' && $razeniAsc) ? 0 : 1">cena</a>
+          {if $razeniSloupec == 'cena'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+          <th><a n:href="Admin:stahovani raditS => pocet, asc => ($razeniSloupec == 'pocet' && $razeniAsc) ? 0 : 1">stažení</a>
+          {if $razeniSloupec == 'pocet'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr n:foreach="$nakupyMidi as $nakup">
+          <td>{$nakup->skladba->nazev}</td>
+          <td>{$nakup->skladba->autor}</td>
+          <td>{$nakup->skladba->cena}</td>
+          <td>{$nakup->pocet}</td>
+        </tr>
+      </tbody>
+    </table>
+    {else}
+        <p>
+          V zadaném období nebyly staženy žádné skladby.
+        </p>
+    {/if}
+  </div> <!-- col -->
+
+  <div class="col-md-6">
+    <h2>Flašinety</h2>
+    {if $nakupyFlasinet->count()}
+    <a n:href="Admin:stahovaniDownload $zacatek, $konec, 'flasinet', raditS=>null, asc=>null" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> uložit jako excel</a>
+
+    {control vp2}
+
+    <table class="table table-striped table-hover table-condensed">
+      <thead>
+        <tr>
+          <th class="col-md-3"><a n:href="Admin:stahovani raditS => nazev, asc => ($razeniSloupec == 'nazev' && $razeniAsc) ? 0 : 1">název</a>
+          {if $razeniSloupec == 'nazev'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+          <th class="col-md-3"><a n:href="Admin:stahovani raditS => autor, asc => ($razeniSloupec == 'autor' && $razeniAsc) ? 0 : 1">interpret</a>
+          {if $razeniSloupec == 'autor'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+          <th><a n:href="Admin:stahovani raditS => cena, asc => ($razeniSloupec == 'cena' && $razeniAsc) ? 0 : 1">cena</a>
+          {if $razeniSloupec == 'cena'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+          <th><a n:href="Admin:stahovani raditS => pocet, asc => ($razeniSloupec == 'pocet' && $razeniAsc) ? 0 : 1">stažení</a>
+          {if $razeniSloupec == 'pocet'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr n:foreach="$nakupyFlasinet as $nakup">
+          <td>{$nakup->skladba->nazev}</td>
+          <td>{$nakup->skladba->autor}</td>
+          <td>{$nakup->skladba->cena}</td>
+          <td>{$nakup->pocet}</td>
+        </tr>
+      </tbody>
+    </table>
+    {else}
+        <p>
+          V zadaném období nebyly staženy žádné skladby.
+        </p>
+    {/if}
+  </div> <!-- col -->
+{/if}
+</div> <!-- row -->

@@ -4,7 +4,7 @@
 //require '.maintenance.php';
 
 // let bootstrap create Dependency Injection container
-$container = require __DIR__ . '/../../aplikace/hudba/app/bootstrap.php';
+$container = require __DIR__ . '/../../app-2-1/app/bootstrap.php';
 
 // run application
 $container->getService('application')->run();

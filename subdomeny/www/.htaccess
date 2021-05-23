@@ -1,32 +1,32 @@
 
 # disable directory listing
 
-	Options -Indexes
+    Options -Indexes
 
 
 # enable cool URL
-	RewriteEngine On
+    RewriteEngine On
 
     Redirect 301 /halfplayback http://halfplayback.premiermusic.cz
 
-	RewriteCond %{HTTP_HOST} ^premiermusic.cz
+    RewriteCond %{HTTP_HOST} ^premiermusic.cz
     RewriteRule (.*) http://www.premiermusic.cz/$1 [R=301,QSA,L]
 
 
   #na localu zakomentovat
   #RewriteBase /
 
-	# prevents files starting with dot to be viewed by browser
-	RewriteRule /\.|^\. - [F]
+    # prevents files starting with dot to be viewed by browser
+    RewriteRule /\.|^\. - [F]
 
-	# front controller
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
+    # front controller
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
 
 
 # enable gzip compression
 
-	#AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json
+    #AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json
 
 

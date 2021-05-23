@@ -1,0 +1,12 @@
+services:
+    - Bazar
+    - Agentura
+    - Vydavatelstvi
+    - Halfplayback
+    - UserManager
+    - Skladba
+    - Uzivatel
+    - Dvd
+    - Tvorba
+    - Kurz
+    - Flasinet

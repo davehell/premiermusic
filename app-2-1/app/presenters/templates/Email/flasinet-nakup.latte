@@ -1,0 +1,49 @@
+{layout none}
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Nákup skladby na MIDI Premier</title>
+</head>
+<body>
+<p>
+  Dobrý den,
+</p>
+
+<p>
+  zakoupil(a) jste si skladbu na serveru MIDI Premier.
+</p>
+
+<p>
+  <strong>Informace o skladbě:</strong>
+</p>
+<ul>
+  <li>Název: {$info->nazev}</li>
+  <li>Interpret: {$info->autor}</li>
+  <li>Cena: {$info->cena}&nbsp;Kč</li>
+  <li>Datum nákupu: {=date('d.m.Y')}</li>
+</ul>
+
+<p>
+  <strong>Odkaz na stažení skladby:</strong><br />
+  <a n:href="//Flasinet:detail $info->id">{link //Skladba:detail $info->id}</a>
+</p>
+
+<p>
+  Platnost odkazu na stažení není časově omezena. Tuto skladbu tedy můžete stahovat stále znovu.
+</p>
+<p>
+  Přehled všech Vámi zakoupených skladeb i s odkazy na jejich stažení najdete ve Vašem profilu: <a n:href="//Ucet:nakupy">{link //Ucet:nakupy}</a>
+</p>
+
+
+<p>
+  S pozdravem
+</p>
+
+<p>
+  Ing. Lubomír Piskoř<br>
+  e-mail: {$params['adminMail']} <br>
+  web: <a n:href="//Sluzby:default">{link //Sluzby:default}</a>
+</p>
+</body>
+</html>

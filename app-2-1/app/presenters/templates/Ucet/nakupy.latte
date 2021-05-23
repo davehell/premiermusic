@@ -1,0 +1,65 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li><a n:href="Ucet:informace">Zákaznický účet</a></li>
+  <li class="active">Zakoupené skladby</li>
+</ol>
+{/block}
+
+
+{block content}
+<h1 n:block=title>Zakoupené skladby</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <h2>MIDI a karaoke</h2>
+    {if $nakupyMidi->count()}
+    <table class="table table-striped table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>název</th>
+          <th>cena</th>
+          <th>datum nákupu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr n:foreach="$nakupyMidi as $nakup">
+          <td><a n:href="Skladba:detail $nakup->skladba->id">{$nakup->skladba->nazev}</a></td>
+          <td>{$nakup->cena}&nbsp;Kč</td>
+          <td>{$nakup->datum|date:'%d.%m.%Y'}</td>
+        </tr>
+      </tbody>
+    </table>
+    {else}
+        <p>
+          Nemáte zakoupené žádné skladby.
+        </p>
+    {/if}
+  </div> <!-- col -->
+
+  <div class="col-md-6">
+    <h2>Flašinety</h2>
+    {if $nakupyFlasinet->count()}
+    <table class="table table-striped table-condensed table-hover">
+      <thead>
+        <tr>
+          <th>název</th>
+          <th>cena</th>
+          <th>datum nákupu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr n:foreach="$nakupyFlasinet as $nakup">
+          <td><a n:href="Flasinet:detail $nakup->skladba->id">{$nakup->skladba->nazev}</a></td>
+          <td>{$nakup->cena}&nbsp;Kč</td>
+          <td>{$nakup->datum|date:'%d.%m.%Y'}</td>
+        </tr>
+      </tbody>
+    </table>
+    {else}
+        <p>
+          Nemáte zakoupené žádné skladby.
+        </p>
+    {/if}
+  </div> </div> <!-- col -->
+</div>

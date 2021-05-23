@@ -1,0 +1,61 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:">Úvod</a></li>
+  <li class="active">Hudební agentura</li>
+</ol>
+{/block}
+
+{block content}
+<h1 n:block=title>Hudební agentura</h1>
+
+{if $user->isInRole('admin')}
+<p>
+  <a n:href="Agentura:pridat" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Přidat kapelu</a>
+</p>
+{/if}
+
+<p>
+  V&nbsp;této sekci nabízím prezentaci kapelám, včetně možnosti jejich zastupování při sjednání hudební produkce. Základní prezentace je zdarma. Obsahuje název kapely, místo odkud kapela je a&nbsp;telefonní kontakt.
+  Za příplatek 500&nbsp;Kč ročně je možno zveřejnit webové stránky a&nbsp;fotku.
+</p>
+
+<p>
+  <a n:href="Agentura:poptavka">Objednávkový formulář pro zveřejnění kapely</a>
+</p>
+
+
+
+<h2>
+  Přehled kapel
+</h2>
+
+
+{if $kapely->count()}
+  {foreach $kapely as $kapela}
+    <div class="media">
+      <a class="pull-left" n:if="$kapela->foto" href="{$basePath}/img/data/agentura/{$kapela->foto}" data-lightbox="group{$kapela->id}">
+        <img class="media-object" src="{$basePath}/img/data/agentura/thumb-{$kapela->foto}" width="100px" height="100px">
+      </a>
+      <div class="media-body">
+        <h3 class="media-heading">{$kapela->nazev}</h3>
+        <p>
+          {$kapela->popis}
+        </p>
+        <p>
+          <a href="{$kapela->www}">{$kapela->www}</a>
+        </p>
+        {if $user->isInRole('admin')}
+        <p>
+          <a n:href="Agentura:detail, $kapela->id" class="btn btn-danger"><span class="glyphicon glyphicon-pencil"></span> Upravit</a>
+          <a n:href="Agentura:smazat, $kapela->id" class="btn btn-danger" onclick="return confirm('Opravdu smazat kapelu?')"><span class="glyphicon glyphicon-remove"></span> Smazat</a>
+        </p>
+        {/if}
+      </div>
+    </div>
+    <hr>
+  {/foreach}
+{else}
+  <p>
+    Nejsou uloženy žádné kapely.
+  </p>
+{/if}

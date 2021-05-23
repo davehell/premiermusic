@@ -1,0 +1,17 @@
+#header2 h1{
+  margin: 0;
+  width: 216px;
+  height: 70px;
+  background: url(../img/logo.png) 0 5px no-repeat;
+}
+
+#header2 h1 span{
+  display: none;
+}
+
+#body-wrap {
+   background: #fff url(../img/bg-flasinet.jpg);
+}
+#header2 {
+  background: none;
+}

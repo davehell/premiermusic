@@ -1,0 +1,95 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li class="active">Halfplayback</li>
+</ol>
+{/block}
+
+{block content}
+<h1 n:block=title>Halfplayback s&nbsp;použitím živých kytar</h1>
+
+<ul>
+  <li>Hudební podklady - pro kytaristy, nekompletní kapely</li>
+  <li>Kompletní podklady pro zpěváky</li>
+</ul>
+
+<p>Vítám Vás na stránkách hudebních podkladů, které jsou natáčeny v domácím studiu většinou live – nejedná se o standart midi.</p>
+
+<p>Nejčastější jsou zde nahrávky bez kytar. Dle zájmu možno na zakázku dodat komplet halfplayback - včetně akustických a elektrických kytar.</p>
+
+<p>Nahrávky většinou obsahují toto nástrojové obsazení: bicí, basa, klávesové nástroje. Dle požadavku možno objednat pouze základ - basa a bicí.</p>
+
+<p><strong>Ukázky jsou v mp3, nahrávky k zakoupení jsou ve formátu wave.</strong></p>
+
+<p>U názvu každé skladby naleznete i označení tóniny.</p>
+
+<p>Vysvětlivky zkratek u názvu skladby:
+<ul>
+  <li>dr. - bicí</li>
+  <li>bs. - basa</li>
+  <li>pn. - piáno</li>
+  <li>hm. - varhany, syntezátory</li>
+  <li>bez kytar - větší osazení nástrojů, chybí pouze kytary</li>
+  <li>komplet - kompletní nástrojová nahrávka pro zpěv či karaoke</li>
+</ul>
+
+<p>Po kliknutí na název skladby, budete přesměrování na Objednávkový formulář, včetně uvedení ceny.</p>
+
+<p>Pokud nějakou píseň nenajdete, lze vyrobit na zakázku dle požadavku.</p>
+
+<p>Moje motto : Hudba je lék !</p>
+
+<p>Děkuji za přízeň, Luboš.</p>
+
+{if $user->isInRole('spravce')}
+<p>
+  <a n:href="Halfplayback:pridat" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Přidat skladbu</a>
+</p>
+{/if}
+
+{form hledaniForm class => ''}
+    <legend>Filtrování skladeb</legend>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Kategorie:</label>
+      {foreach $seznamKategorii as $id => $kategorie}
+        <label class="checkbox-inline">
+          <input n:name="kat{$id}:" /> {$kategorie}
+        </label>
+      {/foreach}
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2">
+        {input 'send'}
+        <a n:href="Halfplayback:" class="btn btn-primary">Zobrazit vše</a>
+      </div>
+    </div>
+{/form hledaniForm}
+
+{if $skladby->count()}
+  {control vp}
+  <table class="table table-striped table-hover vydavatelstvi">
+    <thead>
+      <tr>
+        <th>Ćíslo</th>
+        <th>Název</th>
+        <th>Popis</th>
+        <th>Verze</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr n:foreach="$skladby as $skladba">
+        <td>{$skladba->id}</td>
+        <td>
+        <a n:if="$skladba->soubor" n:href="Halfplayback:download, $skladba->id" class="btn btn-primary" title="Stáhnout mp3 demo skladby"><span class="glyphicon glyphicon-volume-up"></span></a>
+          <a n:href="Halfplayback:detail $skladba->id" title="detail skladby {$skladba->nazev}">{$skladba->nazev}</a>
+        </td>
+        <td>{$skladba->popis}</td>
+        <td>{$skladba->hudba_hpback_kategorie->nazev}</td>
+      </tr>
+    </tbody>
+  </table>
+{else}
+  <p>
+    Nejsou uloženy žádné skladby.
+  </p>
+{/if}

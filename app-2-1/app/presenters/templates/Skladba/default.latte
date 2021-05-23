@@ -1,0 +1,74 @@
+{block title}Výroba a prodej MIDI a karaoke{/block}
+{block jumbotron}
+<div class="row carousel-wrapper hidden-xs hidden-print">
+  <div id="carousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel" data-slide-to="1"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <h2>rozsáhlá databáze MIDI a Karaoke skladeb</h2>
+        <div class="carousel-caption">
+          <p>celkem {$pocet} skladeb, ceny od 30&nbsp;Kč</p>
+          <p><a n:href="Skladba:katalog" class="btn btn-default btn-lg" role="button">Zobrazit skladby</a></p>
+        </div>
+      </div>
+
+      <div class="item">
+        <h2>karaoke na DVD</h2>
+        <div class="carousel-caption">
+          <p>skladby zpracované jako karaoke pro přehrávání v&nbsp;DVD přehrávačích.</p>
+          <p><a n:href="KaraokeNaDvd:default" class="btn btn-default btn-lg" role="button">Více informací</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#carousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#carousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+  </div>
+</div>
+{/block}
+
+{block content}
+
+<div id="boxy">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="row">
+      <div class="col-md-4 formaty">
+        <div class="glyphicon glyphicon-music puntik"></div>
+        <h3>Formáty</h3>
+        <ul>
+          <li><a n:href="KaraokeNaDvd:default">Karaoke na DVD <span class="glyphicon glyphicon-question-sign"></span></a> </li>
+          <li n:foreach="$formaty as $format">{$format}</li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 novinky">
+        <div class="glyphicon glyphicon-fire puntik"></div>
+        <h3>Novinky</h3>
+        <ul n:inner-foreach="$novinky as $skladba">
+          <li><a n:href="Skladba:detail $skladba->id">{$skladba->nazev}</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 oblibene">
+        <div class="glyphicon glyphicon-heart puntik"></div>
+        <h3>Oblíbené</h3>
+        <ul n:inner-foreach="$oblibene as $skladba">
+          <li><a n:href="Skladba:detail $skladba->id">{$skladba->nazev}</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,113 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li><a n:href="Flasinet:default radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null">MIDI pro flašinety</a></li>
+  <li><a n:href="Flasinet:katalog radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null">Katalog skladeb</a></li>
+  <li class="active">Detail skladby</li>
+</ol>
+{/block}
+
+{block scripts}
+  <script>
+    //stazeni skladby po kliknuti na tlacitko #stahnout
+    $('button#stahnout').click(function() {
+      var url = $('#format').val();
+      if(url) window.location = url;
+    });
+
+    //stazeni ukazky skladby po kliknuti na tlacitko #stahnoutDemo
+    $('button#stahnoutDemo').click(function() {
+      var url = $('#formatDema').val();
+      if(url) window.location = url;
+    });
+
+    //stazeni ukazky skladby po kliknuti na tlacitko #stahnoutDemo
+    $('a#koupit').click(function() {
+      return confirm('Chystáte se koupit skladbu {$skladba->nazev} v ceně {$skladba->cena} Kč. Pokračovat?');
+    });
+  </script>
+{/block}
+
+{block title}Detail skladby {$skladba->nazev}{/block}
+
+{block content}
+<h1>Skladba &bdquo;{$skladba->nazev}&ldquo;</h1>
+
+{if $user->loggedIn}
+  {if $maZakoupeno}
+    <p class="alert alert-info">
+      Tuto skladbu máte zakoupenou. Můžete si stáhnout její plnou verzi.
+    </p>
+  {/if}
+{else}
+  <p class="alert alert-warning">
+    Nakupovat a stahovat skladby mohou pouze přihlášení uživatelé.
+  </p>
+{/if}
+
+
+<div class="row">
+  <div class="col-md-6">
+    <dl class="dl-horizontal">
+      <dt>Název</dt>
+      <dd>{$skladba->nazev}</dd>
+      <dt>Interpret</dt>
+      <dd>{$skladba->autor}</dd>
+      <dt>Žánr</dt>
+      <dd>{$skladba->zanr->nazev}</dd>
+      <dt>Poznámka</dt>
+      <dd>{$skladba->poznamka}</dd>
+    </dl>
+{if !$maZakoupeno}
+    <dl class="dl-horizontal">
+      <dt>Cena</dt>
+      <dd>
+        <p>
+          <strong>{$skladba->cena}&nbsp;Kč / {$cenaEur|number:2:',':' '}&nbsp;&euro;</strong><br />včetně poplatků pro OSA
+        </p>
+        <p>
+          <a id="koupit" class="btn btn-success btn-lg {if !$user->loggedIn}disabled{/if}" n:href="Flasinet:nakup, $skladba->id"><span class="glyphicon glyphicon-shopping-cart"></span> Koupit skladbu</a>
+        </p>
+      </dd>
+    </dl>
+{/if}
+  </div>
+  <div class="col-md-6">
+    <form class="well">
+      <div class="form-group">
+        <label class="" for="format">Ukázky ke stažení:</label>
+        <select class="form-control" id="formatDema">
+          <option value="">Zvolte formát</option>
+          <option n:foreach="$soubory as $soubor" n:if="$soubor->format->demo" value="{link //Flasinet:download, $soubor->id}">{$soubor->format->nazev}</option>
+        </select>
+      </div>
+      <button id="stahnoutDemo" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> stáhnout ukázku</button>
+    </form>
+    
+
+    
+    {if $maZakoupeno}
+      <form id="stazeniSkladby" class="well">
+        <div class="form-group">
+          <label for="format">Plná verze ke stažení:</label>
+          <select class="form-control" id="format">
+{*           <option value="">Zvolte formát</option> *}
+            <option n:foreach="$soubory as $soubor" n:if="!$soubor->format->demo" value="{link //Flasinet:download, $soubor->id}">{$soubor->format->nazev}</option>
+          </select>
+        </div>
+        <button id="stahnout" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> stáhnout plnou verzi</button>
+      </form>
+    {/if}
+  </div>
+</div>
+
+
+{if $user->isInRole('admin')}
+  <h2>Editace skladby</h2>
+  <p>
+    <a class="btn btn-danger" n:href="Flasinet:smazat, $skladba->id"><span class="glyphicon glyphicon-remove"></span> Smazat skladbu</a>
+  </p>
+  <div id="editaceSkladby">
+  {control skladbaForm }
+  </div>
+{/if}

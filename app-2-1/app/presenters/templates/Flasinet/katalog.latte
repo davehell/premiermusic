@@ -1,0 +1,82 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li><a n:href="Flasinet:default radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null">MIDI pro flašinety</a></li>
+  <li class="active">Katalog skladeb</li>
+</ol>
+{/block}
+
+{block scripts}
+  <script>
+    $('#frm-hledaniForm-nazev').typeahead({
+      prefetch: {
+        url:  '{$basePath|noescape}/flasinet-skladby.json'
+      },
+      limit: 10
+    });
+
+    $('#frm-hledaniForm-autor').typeahead({
+      prefetch: {
+        url:  '{$basePath|noescape}/flasinet-autori.json'
+      },
+      limit: 10
+    });
+  </script>
+{/block}
+
+{block content}
+
+<h1 n:block=title>Katalog skladeb</h1>
+ 
+{if $adminMode}
+  <p>
+    <a n:href="Flasinet:pridat" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Nová skladba</a>
+  </p>
+{/if}
+
+
+<div class="row hidden-print">
+  <div class="col-sm-6">
+    <div id="hledaniForm-wrapper" class="well">
+      <h3>Vyhledávání</h3>
+      {control hledaniForm}
+    </div>
+  </div>
+</div>
+
+{control vp}
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th class="col-md-3"><a n:href="Flasinet:katalog radit => nazev, asc => ($razeniSloupec == 'nazev' && $razeniAsc) ? 0 : 1">název</a>
+      {if $razeniSloupec == 'nazev'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th class="col-md-3"><a n:href="Flasinet:katalog radit => autor, asc => ($razeniSloupec == 'autor' && $razeniAsc) ? 0 : 1">interpret</a>
+      {if $razeniSloupec == 'autor'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th><a n:href="Flasinet:katalog radit => cena, asc => ($razeniSloupec == 'cena' && $razeniAsc) ? 0 : 1">cena</a>
+      {if $razeniSloupec == 'cena'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th><a n:href="Flasinet:katalog radit => zanr_id, asc => ($razeniSloupec == 'zanr_id' && $razeniAsc) ? 0 : 1">žánr</a>
+      {if $razeniSloupec == 'zanr_id'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {if $adminMode}
+      <th><a n:href="Flasinet:katalog radit => datum_pridani, asc => ($razeniSloupec == 'datum_pridani' && $razeniAsc) ? 0 : 1">přidáno</a>
+      {if $razeniSloupec == 'datum_pridani'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      <th><a n:href="Flasinet:katalog radit => pocet_stazeni, asc => ($razeniSloupec == 'pocet_stazeni' && $razeniAsc) ? 0 : 1">stažení</a>
+      {if $razeniSloupec == 'pocet_stazeni'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {/if}
+    </tr>
+  </thead>
+  <tbody>
+    <tr n:foreach="$skladby as $skladba">
+      <td>
+        <a n:href="Flasinet:detail $skladba->id, radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null">{$skladba->nazev}</a>
+      </td>
+      <td>{$skladba->autor}</td>
+      <td>{$skladba->cena}&nbsp;Kč</td>
+      <td>{$skladba->zanr->nazev}</td>
+      {if $adminMode}
+      <td>{$skladba->datum_pridani|date:'%d.%m.%Y'}</td>
+      <td>{$skladba->pocet_stazeni}</td>
+      {/if}
+    </tr>
+  </tbody>
+</table>

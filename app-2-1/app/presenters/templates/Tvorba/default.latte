@@ -1,0 +1,62 @@
+{block breadcrumb}
+<ol class="breadcrumb">
+  <li><a n:href="Sluzby:">Úvod</a></li>
+  <li class="active">Vlastní tvorba</li>
+</ol>
+{/block}
+
+{block scripts}
+<script>
+  $(function () {
+    $("[data-toggle='popover']").popover( { trigger: "hover", html: true } );
+  });
+</script>
+{/block}
+
+{block content}
+<h1 n:block=title>Vlastní tvorba</h1>
+
+{if $user->isInRole('admin')}
+<p>
+  <a n:href="Tvorba:pridat" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Přidat skladbu</a>
+</p>
+{/if}
+
+{if $items->count()}
+  {foreach $items as $item}
+    <div class="row">
+      <div class="col-md-12">
+        <h4>{$item->nazev}</h4>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        {if $user->isInRole('admin')}
+          <p>
+            <a n:href="Tvorba:detail, $item->id" class="btn btn-danger"><span class="glyphicon glyphicon-pencil"></span> Upravit</a>
+            <a n:href="Tvorba:smazat, $item->id" class="btn btn-danger" onclick="return confirm('Opravdu smazat skladbu?')"><span class="glyphicon glyphicon-remove"></span> Smazat</a>
+          </p>
+        {/if}
+        <p>
+          {$item->popis}
+        </p>
+        <dl class="dl-horizontal">
+          <dt>Interpret</dt>
+          <dd>{$item->interpret}</dd>
+          <dt>Hudba</dt>
+          <dd>{$item->hudba}</dd>
+          <dt>Text</dt>
+          <dd>{$item->text}</dd>
+        </dl>
+      </div>
+      <div class="col-sm-6 col-md-8">
+        {$item->url|noescape}
+      </div>
+    </div>
+  {/foreach}
+{else}
+  <p>
+    Nejsou uloženy žádné skladby.
+  </p>
+{/if}
+

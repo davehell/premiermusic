@@ -1,0 +1,23 @@
+{var $robots = noindex}
+
+{block scripts}
+  <script>
+    $( document ).ready(function() {
+      $('#frm-prihlaseniForm-login').focus();
+    });
+  </script>
+{/block}
+
+{block content}
+<h1 n:block=title>Přihlášení</h1>
+
+<div class="row">
+<div class="col-sm-5">
+<div class="well">
+{control prihlaseniForm}
+<p>
+  <a n:href="Ucet:zapomenuteHeslo">Zapomenuté heslo</a>
+</p>
+</div>
+</div>
+</div>

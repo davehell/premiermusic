@@ -161,3 +161,7 @@ table.vydavatelstvi .buttons {
   width: 100px;
   display: inline-block;
 }
+
+.media:first-child {
+    margin-top: 15px;
+}

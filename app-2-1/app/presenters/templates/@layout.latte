@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+    <meta name="description" content="">
+  <meta name="robots" content="{$robots}" n:ifset="$robots">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>premiermusic - {block title|striptags}{/block}</title>
+
+  <link rel="stylesheet" media="all" href="{$basePath}/css/bootstrap.min.css">
+  <link rel="stylesheet" media="all" href="{$basePath}/css/lightbox.css"/>
+    <link rel="stylesheet" media="all" href="{$basePath}/css/screen.css">
+  <link href='http://fonts.googleapis.com/css?family=Raleway|Comfortaa' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="{$basePath}/favicon.ico">
+    {block head}{/block}
+</head>
+
+<body>
+<div id="body-wrap">
+  <div id="header" class="navbar navbar-inverse">
+    <div class="container">
+      {block headerMenu}
+      <ul class="nav navbar-nav">
+        <li><a n:href="Sluzby:">Úvod</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nabízené služby <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            {include 'nabizeneSluzby.latte'}
+          </ul>
+        </li>
+        <li><a n:href="Sluzby:kontakt">Kontakt</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        {if $user->loggedIn}
+        <li id="uzivatel">{$user->getIdentity()->data['login']}</li>
+        <li><a n:href="Ucet:odhlaseni">Odhlášení</a></li>
+        {else}
+        <li><a n:href="Ucet:prihlaseni">Přihlášení</a></li>
+        {/if}
+      </ul>
+      {/block}
+    </div>
+  </div> <!-- /#header -->
+
+  <div id="header2">
+    <div class="container">
+      {block header}
+      <a n:href="Sluzby:">
+        <h1>premiermusic.cz<br> <span>stránky s hudební tématikou určené nejen pro muzikanty</span></h1>
+      </a>
+      {/block}
+    </div><!-- /.container -->
+  </div> <!-- /#header2 -->
+
+  <div id="page" class="container">
+    <div class="row">
+      {block breadcrumb}{/block}
+      <div class="col-md-12">
+        <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type}">{$flash->message}</div>
+        {include content}
+      </div>
+    </div>
+  </div><!-- /#page -->
+
+  <div id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <p>
+            Ing. Lubomír Piskoř
+          </p>
+          <p>
+            Dolní Sklenov 83<br>
+            739 46 Hukvaldy
+          </p>
+          <p>
+            Tel: 602 744 055<br>
+            E-mail: lubos.p@cbox.cz
+          </p>
+        </div>
+
+        <div class="col-md-4">
+          <ul>
+            {include 'nabizeneSluzby.latte'}
+          </ul>
+        </div>
+      </div>
+    </div><!-- /.container -->
+  </div><!-- /#footer -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="{$basePath}/js/netteForms.js"></script>
+  <script src="{$basePath}/js/bootstrap.min.js"></script>
+  <script src="{$basePath}/js/lightbox-2.6.min.js"></script>
+
+  {block midiScripts}{/block}
+  {block scripts}{/block}
+  <script>
+    (function(i,s,o,g,r,a,m) { i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
+    { (i[r].q=i[r].q||[]).push(arguments) },i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    } )(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-1224661-5', 'premiermusic.cz');
+    ga('send', 'pageview');
+  </script>
+</div><!-- /.body-wrap -->
+</body>
+</html>

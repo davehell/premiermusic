@@ -1,0 +1,111 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "a8837a37d1a3241a8a35223378328d9c",
+    "packages": [
+        {
+            "name": "nette/nette",
+            "version": "v2.1.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/nette.git",
+                "reference": "5e3bb6b2f48cfd7ac0a2b22cffb32c9a715d4f76"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/nette/zipball/5e3bb6b2f48cfd7ac0a2b22cffb32c9a715d4f76",
+                "reference": "5e3bb6b2f48cfd7ac0a2b22cffb32c9a715d4f76",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "ext-tokenizer": "*",
+                "php": ">=5.3.1"
+            },
+            "replace": {
+                "latte/latte": "self.version",
+                "nette/application": "self.version",
+                "nette/bootstrap": "self.version",
+                "nette/caching": "self.version",
+                "nette/component-model": "self.version",
+                "nette/database": "self.version",
+                "nette/di": "self.version",
+                "nette/finder": "self.version",
+                "nette/forms": "self.version",
+                "nette/http": "self.version",
+                "nette/mail": "self.version",
+                "nette/neon": "self.version",
+                "nette/php-generator": "self.version",
+                "nette/reflection": "self.version",
+                "nette/robot-loader": "self.version",
+                "nette/safe-stream": "self.version",
+                "nette/security": "self.version",
+                "nette/tokenizer": "self.version",
+                "nette/utils": "self.version",
+                "tracy/tracy": "self.version"
+            },
+            "require-dev": {
+                "nette/tester": "~1.6"
+            },
+            "suggest": {
+                "ext-fileinfo": "",
+                "ext-gd": "",
+                "ext-mbstring": "",
+                "ext-pdo": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Nette/"
+                ],
+                "files": [
+                    "Nette/common/shortcuts.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "homepage": "https://davidgrudl.com"
+                },
+                {
+                    "name": "Nette Community",
+                    "homepage": "https://nette.org/contributors"
+                }
+            ],
+            "description": "Nette Framework - innovative framework for fast and easy development of secured web applications in PHP. Write less, have cleaner code and your work will bring you joy.",
+            "homepage": "https://nette.org",
+            "keywords": [
+                "Forms",
+                "database",
+                "debugging",
+                "framework",
+                "mailing",
+                "mvc",
+                "templating"
+            ],
+            "support": {
+                "issues": "https://github.com/nette/nette/issues",
+                "source": "https://github.com/nette/nette/tree/v2.1.13"
+            },
+            "time": "2020-10-07T01:34:28+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}

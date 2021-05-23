@@ -1,0 +1,46 @@
+<ul class="nav navbar-nav">
+  <li><a n:href="Sluzby:default">Úvod</a></li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nabízené služby <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+      {include 'nabizeneSluzby.latte'}
+    </ul>
+  </li>
+  {* <li><a n:href="Flasinet:katalog radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null">Katalog skladeb</a></li> *}
+  {if $user->loggedIn}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Můj účet <b class="caret"></b></a>
+    <ul class="dropdown-menu">
+       <li><a n:href="Ucet:informace">Informace o zákazníkovi</a> <!-- - přehled informací o zákazníkovi, změna e-mailu a přístupových údajů --></li>
+       <li><a n:href="Ucet:kredit">Dobíjení kreditu</a> <!-- - navýšení kreditu, historie dobíjení kreditu --></li>
+       <li><a n:href="Ucet:nakupy">Zakoupené skladby</a> <!-- - přehled zakoupených skladeb, možnost jejich opětovného stažení --></li>
+    </ul>
+  </li>
+  {else}
+  <li><a n:href="Ucet:informace">Můj účet</a></li>
+  {/if}
+  <li><a n:href="Sluzby:jakNakupovat">Jak nakupovat</a></li>
+  <li><a n:href="Sluzby:kontakt">Kontakt</a></li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+  {if $user->loggedIn}
+    {if $user->isInRole('admin')}
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrace <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+         <li><a n:href="Admin:">Přehled</a></li>
+         <li><a n:href="Admin:stahovani raditS=>null, asc=>null, login=>null, email=>null, raditZ=>null">Stahování</a></li>
+         <li><a n:href="Skladba:katalog, admin">Přidat MIDI skladby</a></li>
+         <li><a n:href="Flasinet:katalog, admin">Přidat Flašinety</a></li>
+         <li><a n:href="Admin:zakaznici login=>null, email=>null, raditZ=>null, asc=>null, raditS=>null">Zákazníci</a></li>
+      </ul>
+    </li>
+    {/if}
+  <li id="uzivatel">{$user->getIdentity()->data['login']}</li>
+  <li><a n:href="Ucet:odhlaseni">Odhlášení</a></li>
+  {else}
+  <li><a n:href="Ucet:registrace">Registrace</a></li>
+  <li><a n:href="Ucet:prihlaseni">Přihlášení</a></li>
+  {/if}
+</ul>
