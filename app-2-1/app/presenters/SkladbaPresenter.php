@@ -57,11 +57,11 @@ class SkladbaPresenter extends BasePresenter
     $form->addText('cena', 'Cena:')
       ->setRequired('Prosím zadejte cenu skladby.')
       ->addRule(Form::INTEGER, 'Částka musí být číslo')
-      ->addRule(Form::RANGE, 'Částka musí být od %d do %d Kč', array(1, 100))
+      ->addRule(Form::RANGE, 'Částka musí být od %d do %d Kč', array(1, 1000))
       ->setType('number');
 
     $form->addText('poznamka', 'Poznámka:')
-      ->addRule(Form::MAX_LENGTH, 'Poznámka musí mít maximálně %d znaků', 100);
+      ->addRule(Form::MAX_LENGTH, 'Poznámka musí mít maximálně %d znaků', 1000);
 
     $form->addSelect('zanr_id', 'Žánr:', $this->skladby->seznamZanru())
       ->setRequired('Prosím zadejte žánr.')
