@@ -13,21 +13,6 @@
             <h1><span>midi&nbsp;premier</span></h1>
           </a>
         </div>
-        <div class="col-md-6 hidden-print">
-          <form id="hledaniSkladby" class="navbar-form navbar-left">
-            <div class="form-group">
-              <input id="nazev" type="text" class="form-control tt-query" placeholder="název skladby">
-              <input id="id" type="hidden" data-skladba-detail="{link Flasinet:detail, xxx}" data-skladba-filtr="{link Flasinet:katalog, nazev=>xxx}" data-seznam-skladeb="{$basePath|noescape}/flasinet-skladby.json">
-            </div>
-            <button type="button" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-search"></span> Hledat</button>
-          </form>
-        </div>
-        <div class="col-md-3 hidden-xs hidden-print">
-          <a n:href="Flasinet:katalog radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null" id="katalog">
-            <span>Katalog skladeb</span>
-            <span class="glyphicon glyphicon-book"></span>
-          </a>
-        </div>
       </div>
 {/block}
 

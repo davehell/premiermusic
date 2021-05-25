@@ -15,3 +15,9 @@
 #header2 {
   background: none;
 }
+
+#hledaniSkladby #nazev {
+  background-color: #fff;
+  height: 45px;
+  border-radius: 0;
+}
