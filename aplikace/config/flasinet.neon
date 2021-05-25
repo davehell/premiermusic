@@ -1,5 +1,0 @@
-services:
-	- UserManager
-	- Flasinet
-	- Uzivatel
-	- Kurz

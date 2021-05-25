@@ -1,5 +1,0 @@
-services:
-	- Halfplayback
-	- UserManager
-	- Uzivatel
-	- Skladba
