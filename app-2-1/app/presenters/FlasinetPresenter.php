@@ -321,4 +321,21 @@ class FlasinetPresenter extends BasePresenter
     $this->flashMessage('Sklaba byla smazána.', 'success');
     $this->redirect('Flasinet:katalog');
     }
+
+    public function actionExport($id)
+    {
+      //$data = ["aaa" => "bbb"];
+      $skladby = $this->skladby->findAll();
+      foreach ($skladby as $skladba) {
+        $data[] = [
+          "id" => $skladba->id
+          ,"nazev" => $skladba->nazev
+          ,"url" => $this->link('//Flasinet:detail', $skladba->id)
+          ,"autor" => $skladba->autor
+          ,"popis" => $skladba->poznamka
+          ,"zanr" => $skladba->zanr->nazev
+        ];
+      }
+      return $this->sendResponse(new \Nette\Application\Responses\JsonResponse($data, "application/json;charset=utf-8"));
+    }
 }
