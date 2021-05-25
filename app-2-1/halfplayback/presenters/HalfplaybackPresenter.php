@@ -136,7 +136,7 @@ class HalfplaybackPresenter extends BasePresenter
     $this->flashMessage('Skladba byla uložena.' , 'success');
 
     //presun uploadovanych souboru z tmp adresare do ciloveho umisteni
-    $destDir = $this->context->parameters['appDir'] . '/../data/halfplayback';
+    $destDir = $this->context->parameters['appDir'] . '/../../data/halfplayback';
     $nazev = '';
     foreach ($uploads as $soubor) {
       if($soubor && $soubor->isOk) {
@@ -248,7 +248,7 @@ class HalfplaybackPresenter extends BasePresenter
     }
 
     if($skladba->soubor) {
-      $destDir = $this->context->parameters['appDir'] . '/../data/halfplayback';
+      $destDir = $this->context->parameters['appDir'] . '/../../data/halfplayback';
       $nazev = '/skladba-' . $skladba->id;
       if(file_exists($destDir . '/' . $nazev)) unlink($destDir . '/' . $nazev);
     }
@@ -273,6 +273,6 @@ class HalfplaybackPresenter extends BasePresenter
       $this->error('Požadovaná skladba neexistuje.');
     }
 
-    $this->sendResponse(new FileResponse($this->context->parameters['appDir'] . '/../data/halfplayback' . '/skladba-' . $skladba->id, $skladba->soubor));
+    $this->sendResponse(new FileResponse($this->context->parameters['appDir'] . '/../../data/halfplayback' . '/skladba-' . $skladba->id, $skladba->soubor));
 	}
 }
