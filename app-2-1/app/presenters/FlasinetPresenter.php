@@ -146,7 +146,7 @@ class FlasinetPresenter extends BasePresenter
     $this->flashMessage('Skladba byla uložena.', 'success');
 
     //presun uploadovanych souboru z tmp adresare do ciloveho umisteni
-    $destDir = $this->context->parameters['appDir'] . '/../data/flasinet';
+    $destDir = $this->context->parameters['appDir'] . '/../../data/flasinet';
     $soubory = array();
     foreach ($uploads as $soubor) {
       if($soubor && $soubor->isOk) {
@@ -287,7 +287,7 @@ class FlasinetPresenter extends BasePresenter
       }
     }
 
-    $this->sendResponse(new FileResponse($this->context->parameters['appDir'] . '/../data/flasinet' . '/skladba-' . $soubor->skladba_id . '-' . $soubor->format_id, $soubor->nazev));
+    $this->sendResponse(new FileResponse($this->context->parameters['appDir'] . '/../../data/flasinet' . '/skladba-' . $soubor->skladba_id . '-' . $soubor->format_id, $soubor->nazev));
     }
 
 
@@ -314,7 +314,7 @@ class FlasinetPresenter extends BasePresenter
     }
 
     foreach($soubory as $soubor) {
-      $nazev = $this->context->parameters['appDir'] . '/../data/flasinet' . '/skladba-' . $soubor->skladba_id . '-' . $soubor->format_id;
+      $nazev = $this->context->parameters['appDir'] . '/../../data/flasinet' . '/skladba-' . $soubor->skladba_id . '-' . $soubor->format_id;
       if(file_exists($nazev)) unlink($nazev);
     }
 

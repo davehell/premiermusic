@@ -287,6 +287,6 @@ class VydavatelstviPresenter extends BasePresenter
       $this->error('Požadovaný soubor neexistuje.');
     }
 
-    $this->sendResponse(new FileResponse($this->context->parameters['appDir'] . '/../data/midi' . '/skladba-' . $soubor->skladba_id . '-' . $soubor->format_id, $soubor->nazev));
+    $this->sendResponse(new FileResponse($this->context->parameters['appDir'] . '/../../data/midi' . '/skladba-' . $soubor->skladba_id . '-' . $soubor->format_id, $soubor->nazev));
     }
 }
