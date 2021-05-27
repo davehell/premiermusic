@@ -1,23 +1,24 @@
-#header2 h1{
-  margin: 0;
-  width: 216px;
-  height: 70px;
-  background: url(../img/logo.png) 0 5px no-repeat;
-}
-
-#header2 h1 span{
-  display: none;
-}
-
 #body-wrap {
-   background: #fff url(../img/bg-flasinet.jpg);
+   background: #fff url(../img/flasinet/bg-flasinet.jpg);
 }
 #header2 {
   background: none;
+  margin-bottom: 10px;
 }
-
 #hledaniSkladby #nazev {
   background-color: #fff;
   height: 45px;
   border-radius: 0;
+}
+
+#logos {
+  display: flex;
+  justify-content: space-between;
+}
+#logos #logo-atelier,
+#logos #logo-premier {
+  margin:  auto 0;
+}
+#logos #nadpis span {
+  display: none;
 }
