@@ -48,6 +48,17 @@ class Flasinet extends Nette\Object
         return $this->database->table('flasinet_soubor')->where('skladba_id', $id);
     }
 
+    /** @return Nette\Database\Table\Selection */
+    public function soubor($id, $format)
+    {
+        return $this->database->table('flasinet_soubor')
+        ->select('skladba.nazev, flasinet_soubor.id')
+        ->where('skladba_id', $id)
+        ->where('format.nazev', $format)
+        ->where('format.aktivni', 1)
+        ->fetch();
+    }
+
   /** @return array */
     public function seznamZanru()
     {

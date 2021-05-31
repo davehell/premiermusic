@@ -15,11 +15,6 @@
       if(url) window.location = url;
     });
 
-    //stazeni ukazky skladby po kliknuti na tlacitko #stahnoutDemo
-    $('button#stahnoutDemo').click(function() {
-      var url = $('#formatDema').val();
-      if(url) window.location = url;
-    });
 
     //stazeni ukazky skladby po kliknuti na tlacitko #stahnoutDemo
     $('a#koupit').click(function() {
@@ -76,26 +71,19 @@
     <form class="well">
       <div class="form-group">
         <label class="" for="format">Ukázky ke stažení:</label>
-        <select class="form-control" id="formatDema">
-          <option value="">Zvolte formát</option>
-          <option n:foreach="$soubory as $soubor" n:if="$soubor->format->demo" value="{link //Flasinet:download, $soubor->id}">{$soubor->format->nazev}</option>
-        </select>
       </div>
-      <button id="stahnoutDemo" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> stáhnout ukázku</button>
-    </form>
-    
 
-    
+      <a n:if="$souborText" n:href="Flasinet:download, $souborText->id" class="btn btn-primary" title="Stáhnout text skladby"><span class="glyphicon glyphicon-align-justify"></span> text</a>
+      &nbsp;&nbsp;&nbsp;
+      <a n:if="$souborMp3" n:href="Flasinet:download, $souborMp3->id" class="btn btn-primary" title="Stáhnout mp3 demo skladby"><span class="glyphicon glyphicon-volume-up"></span> mp3</a>
+    </form>
+
     {if $maZakoupeno}
       <form id="stazeniSkladby" class="well">
         <div class="form-group">
           <label for="format">Plná verze ke stažení:</label>
-          <select class="form-control" id="format">
-{*           <option value="">Zvolte formát</option> *}
-            <option n:foreach="$soubory as $soubor" n:if="!$soubor->format->demo" value="{link //Flasinet:download, $soubor->id}">{$soubor->format->nazev}</option>
-          </select>
         </div>
-        <button id="stahnout" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-save"></span> stáhnout plnou verzi</button>
+        <a n:if="$souborMidi" n:href="Flasinet:download, $souborMidi->id" class="btn btn-primary" title="Stáhnout plnou verzi skladby"><span class="glyphicon glyphicon-floppy-save"></span> plná verze</a>
       </form>
     {/if}
   </div>

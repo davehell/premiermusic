@@ -220,7 +220,9 @@ class FlasinetPresenter extends BasePresenter
       $this->error('Požadovaná skladba neexistuje.');
     }
     $this->template->skladba = $skladba;
-    $this->template->soubory = $this->skladby->formatySkladby($id);
+    $this->template->souborText = $this->skladby->soubor($id, "text");
+    $this->template->souborMp3 = $this->skladby->soubor($id, "mp3");
+    $this->template->souborMidi = $this->skladby->soubor($id, "MIDI");
     $this->template->maZakoupeno = $this->uzivatele->maZakoupeno($this->user->id, $id, "flasinet");
 
     $kurzEur = $this->kurzy->eur();
@@ -302,7 +304,6 @@ class FlasinetPresenter extends BasePresenter
     if (!$skladba) {
       $this->error('Požadovaná skladba neexistuje.');
     }
-    $soubory = $this->skladby->formatySkladby($id);
 
     try {
       $this->skladby->delete($id);
@@ -313,6 +314,7 @@ class FlasinetPresenter extends BasePresenter
       $this->redirect('Flasinet:detail', $id);
     }
 
+    $soubory = $this->skladby->formatySkladby($id);
     foreach($soubory as $soubor) {
       $nazev = $this->context->parameters['appDir'] . '/../../data/flasinet' . '/skladba-' . $soubor->skladba_id . '-' . $soubor->format_id;
       if(file_exists($nazev)) unlink($nazev);
@@ -324,7 +326,6 @@ class FlasinetPresenter extends BasePresenter
 
     public function actionExport($id)
     {
-      //$data = ["aaa" => "bbb"];
       $skladby = $this->skladby->findAll();
       foreach ($skladby as $skladba) {
         $data[] = [
