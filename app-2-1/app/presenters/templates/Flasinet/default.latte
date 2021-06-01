@@ -1,8 +1,14 @@
 {block title}MIDI pro flašinety{/block}
 
 {block content}
+
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-3 hidden-print">
+    <a n:href="Flasinet:katalog radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null"
+    id="katalogFlasinet" title="Zobrazit katalog se všemi skladbami">
+      <span class="glyphicon glyphicon-book"></span>
+      Katalog skladeb
+    </a>
   </div>
 
   <div class="col-md-6 hidden-print">
@@ -14,25 +20,15 @@
       <button type="button" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-search"></span> Hledat</button>
     </form>
   </div>
+
+  <div class="col-md-3 hidden-print">
+  </div>
 </div>
 
-<div class="row">
-  <div class="col-md-3">
-  </div>
-{* 
-  <div class="col-md-6 hidden-print">
-    <a n:href="Flasinet:katalog radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null" id="katalog">
-      <span>Katalog skladeb</span>
-      <span class="glyphicon glyphicon-book"></span>
-    </a>
-  </div>
- *}
-  <div class="col-md-3 hidden-xs hidden-print">
-  </div>
-</div>
+
 
 <div id="boxy">
-  <div class="col-md-10 col-md-offset-1">
+  <div class="col-md-6 col-md-offset-3">
     <div class="row">
       <div class="col-md-6 novinky">
         <div class="glyphicon glyphicon-fire puntik"></div>

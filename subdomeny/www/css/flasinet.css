@@ -22,3 +22,26 @@
 #logos #nadpis span {
   display: none;
 }
+
+
+#katalogFlasinet {
+  color: #444;
+  display: block;
+  /*height: 60px;*/
+  line-height: 60px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+}
+
+#katalogFlasinet:hover {
+  text-decoration: none;
+}
+
+#katalogFlasinet .glyphicon {
+  /*font-size: 40px;*/
+  margin-right: 10px;
+  font-weight: normal;
+}
+#katalogFlasinet:hover .glyphicon {
+  color: #ed9c28;
+}

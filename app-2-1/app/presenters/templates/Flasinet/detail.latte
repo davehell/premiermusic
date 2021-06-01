@@ -72,20 +72,18 @@
   <div class="col-md-6">
     <form class="well">
       <div class="form-group">
-        <label class="" for="format">Ukázky ke stažení:</label>
+        <label class="" for="format">Ke stažení:</label>
       </div>
 
-      <a n:if="$souborMp3" n:href="Flasinet:download, $souborMp3->id" class="btn btn-primary" title="Stáhnout mp3 demo skladby"><span class="glyphicon glyphicon-volume-up"></span> mp3</a>
+      <a n:if="$souborMp3" n:href="Flasinet:download, $souborMp3->id" class="btn btn-primary" title="Stáhnout mp3 demo skladby"><span class="glyphicon glyphicon-volume-up"></span> Demo mp3</a>
+
+      {if $maZakoupeno}
+        &nbsp;&nbsp;
+        <a n:if="$souborMidi" n:href="Flasinet:download, $souborMidi->id" class="btn btn-primary" title="Stáhnout plnou verzi skladby"><span class="glyphicon glyphicon-floppy-save"></span> Plná verze</a> 
+      {/if}
     </form>
 
-    {if $maZakoupeno}
-      <form id="stazeniSkladby" class="well">
-        <div class="form-group">
-          <label for="format">Plná verze ke stažení:</label>
-        </div>
-        <a n:if="$souborMidi" n:href="Flasinet:download, $souborMidi->id" class="btn btn-primary" title="Stáhnout plnou verzi skladby"><span class="glyphicon glyphicon-floppy-save"></span> plná verze</a>
-      </form>
-    {/if}
+
   </div>
 </div>
 
