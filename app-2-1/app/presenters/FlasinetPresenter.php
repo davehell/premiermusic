@@ -220,7 +220,6 @@ class FlasinetPresenter extends BasePresenter
       $this->error('Požadovaná skladba neexistuje.');
     }
     $this->template->skladba = $skladba;
-    $this->template->souborText = $this->skladby->soubor($id, "text");
     $this->template->souborMp3 = $this->skladby->soubor($id, "mp3");
     $this->template->souborMidi = $this->skladby->soubor($id, "MIDI");
     $this->template->maZakoupeno = $this->uzivatele->maZakoupeno($this->user->id, $id, "flasinet");
