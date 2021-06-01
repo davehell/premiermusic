@@ -61,6 +61,9 @@ class FlasinetPresenter extends BasePresenter
     $form->addText('poznamka', 'Poznámka:')
       ->addRule(Form::MAX_LENGTH, 'Poznámka musí mít maximálně %d znaků', 1000);
 
+    $form->addText('delka', 'Délka skladby:')
+      ->addRule(Form::MAX_LENGTH, 'Délka skladby musí mít maximálně %d znaků', 100);
+
     $form->addSelect('zanr_id', 'Žánr:', $this->skladby->seznamZanru())
       ->setRequired('Prosím zadejte žánr.')
       ->setPrompt('Zvolte žánr');
