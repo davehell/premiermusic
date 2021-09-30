@@ -1,14 +1,27 @@
 {block title}MIDI pro flašinety{/block}
 
+{block jumbotron}
+  <div class="row carousel-wrapper hidden-xs hidden-print">
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <h2>Rozsáhlá databáze skladeb</h2>
+          <div class="carousel-caption">
+            <p>celkem {$pocet} skladeb</p>
+            <p><a n:href="Flasinet:katalog radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null" class="btn btn-default btn-lg" role="button">Zobrazit skladby</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{/block}
+
+
 {block content}
 
 <div class="row">
   <div class="col-md-3 hidden-print">
-    <a n:href="Flasinet:katalog radit=>null, asc=>null, nazev=>null, autor=>null, zanr=>null, verze=>null"
-    id="katalogFlasinet" title="Zobrazit katalog se všemi skladbami">
-      <span class="glyphicon glyphicon-book"></span>
-      Katalog skladeb
-    </a>
   </div>
 
   <div class="col-md-6 hidden-print">
