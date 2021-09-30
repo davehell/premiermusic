@@ -238,7 +238,8 @@ class AdminPresenter extends BasePresenter
     $this->template->uzivatel = $uzivatel;
     $this->template->sumaNakupu = $this->uzivatele->sumaNakupu($id);
     $this->template->historie = $this->uzivatele->historieDobijeni($id);
-    $this->template->nakupy = $this->uzivatele->zakoupeneSkladby($id);
+    $this->template->nakupyMidi = $this->uzivatele->zakoupeneSkladby($id, "midi");
+    $this->template->nakupyFlasinet = $this->uzivatele->zakoupeneSkladby($id, "flasinet");
     $this['kreditForm']->setDefaults(array('uzivId' => $id));
     }
 
