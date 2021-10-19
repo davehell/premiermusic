@@ -41,7 +41,17 @@ class Uzivatel extends Nette\Object
     /** @return array */
     public function findAllDetails($filtry = null, $razeni = null, $limit = null, $offset = null)
     {
-    $query = 'SELECT uzivatel.id AS id, login, email, posledni_prihlaseni, datum_registrace, kredit, sum(cena) AS nakoupeno FROM uzivatel LEFT JOIN nakup ON uzivatel.id = nakup.uzivatel_id ';
+
+    $query = '
+        SELECT uzivatel.id as id, login, email, posledni_prihlaseni, datum_registrace, kredit,
+        SUM(t.cena) AS nakoupeno
+        FROM (
+          SELECT cena, uzivatel_id FROM nakup
+          UNION ALL
+          SELECT cena, uzivatel_id FROM flasinet_nakup
+        ) t
+        LEFT JOIN uzivatel on uzivatel.id = uzivatel_id
+    ';
 
     if($filtry['login']) {
       $query .= ' WHERE login="' . $filtry['login'] . '" ';
