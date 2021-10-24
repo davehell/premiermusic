@@ -50,8 +50,9 @@ class Uzivatel extends Nette\Object
           UNION ALL
           SELECT cena, uzivatel_id FROM flasinet_nakup
         ) t
-        LEFT JOIN uzivatel on uzivatel.id = uzivatel_id
+        RIGHT JOIN uzivatel on uzivatel.id = uzivatel_id
     ';
+    //RIGHT join protože tam musí být všichni uživatelé! I ti, kteří nic nekoupili, takže nejsou obsaženi v UNION dotazu.
 
     if($filtry['login']) {
       $query .= ' WHERE login="' . $filtry['login'] . '" ';
