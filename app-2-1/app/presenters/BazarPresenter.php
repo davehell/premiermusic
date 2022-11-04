@@ -54,10 +54,10 @@ class BazarPresenter extends BasePresenter
       ->addCondition(Form::FILLED)
       ->addRule(Form::IMAGE, 'Foto musí být JPEG, PNG nebo GIF.');
 
-    $form->addText('antiSpam', 'Ochrana proti spamu:  Kolik je dvakrát tři? (výsledek napište číslem)', 30)
+    $form->addText('antiSpam', 'Ochrana proti spamu:  Kolik je tři krát tři? (výsledek napište číslem)', 30)
       ->setRequired('Vyplňte ochranu proti spamu.')
       ->addRule(Form::INTEGER, 'Špatně vyplněná ochrana proti spamu')
-      ->addRule(Form::RANGE, 'Špatně vyplněná ochrana proti spamu', array(6, 6));
+      ->addRule(Form::RANGE, 'Špatně vyplněná ochrana proti spamu', array(9, 9));
 
     $form->addSubmit('send', 'Uložit');
 
@@ -97,6 +97,11 @@ class BazarPresenter extends BasePresenter
     unset($values['foto2']);
     unset($values['foto3']);
     unset($values['antiSpam']);
+
+    if(strpos($values['text'], 'půjčka') !== false || strpos($values['text'], 'pujcka') !== false) {
+      $this->flashMessage('Inzerát se nepodařilo uložit.', 'danger');
+      $this->redirect('this');
+    }
 
     if($inzeratId) { //editace
       try {
