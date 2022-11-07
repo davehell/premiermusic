@@ -141,7 +141,6 @@ form .radio label.required:after {
   content: "";
 }
 
-#frm-inzeratForm-text, /* bazar */
 #frm-nakupForm-adresa, /* karaoke na dvd, vydavatelstvi, halfplayback  */
 #frm-poptavkaForm-popis, #frm-poptavkaForm-kontakt /* agentura */
 {
