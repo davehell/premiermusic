@@ -110,6 +110,7 @@ class SkladbaPresenter extends BasePresenter
       ->setPrompt('všechny');
 
     $form->addSubmit('send', 'Hledat');
+    $form->addSubmit('reset', 'Zrušit filtr');
 
     $form->onSuccess[] = $this->hledaniFormSucceeded;
 
@@ -183,10 +184,15 @@ class SkladbaPresenter extends BasePresenter
 
   public function hledaniFormSucceeded($form)
   {
-    $values = $form->getValues();
-    $params = array('nazev' => $values['nazev'], 'autor' => $values['autor'], 'zanr' => $values['zanr'], 'verze' => $values['verze']);
-    if(!$params['nazev']) $params['nazev'] = null;
-    if(!$params['autor']) $params['autor'] = null;
+    if ($form['reset']->isSubmittedBy()) {
+      $params = array('nazev' => null, 'autor' => null, 'zanr' => null, 'verze' => null, 'radit' => null, 'asc' => null);
+    }
+    else {
+      $values = $form->getValues();
+      $params = array('nazev' => $values['nazev'], 'autor' => $values['autor'], 'zanr' => $values['zanr'], 'verze' => $values['verze']);
+      if(!$params['nazev']) $params['nazev'] = null;
+      if(!$params['autor']) $params['autor'] = null;
+    }
     $this->redirect('Skladba:katalog', $params);
   }
 

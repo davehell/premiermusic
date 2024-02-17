@@ -224,7 +224,6 @@ class VydavatelstviPresenter extends BasePresenter
   {
     if ($form['reset']->isSubmittedBy()) {
       $params = array('nazev' => null, 'popis' => null, 'kategorie' => null, 'radit' => null, 'asc' => null);
-      $this->redirect('Vydavatelstvi:default', $params);
     }
     else {
       $values = $form->getValues();
@@ -232,8 +231,8 @@ class VydavatelstviPresenter extends BasePresenter
       $params = array('nazev' => $values['nazev'], 'popis' => $values['popis'], 'kategorie' => $values['kategorie']);
       if(!$params['nazev']) $params['nazev'] = null;
       if(!$params['popis']) $params['popis'] = null;
-      $this->redirect('Vydavatelstvi:default', $params);
     }
+    $this->redirect('Vydavatelstvi:default', $params);
   }
 
   public function renderDefault()
