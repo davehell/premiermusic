@@ -140,8 +140,8 @@ class Skladba extends Nette\Object
     }
 
   /** @return null */
-    public function exportNazvuSkladeb($soubor)
-    {
+  public function exportNazvuSkladeb($soubor)
+  {
     $skladby = $this->database->table('skladba')->select('id,nazev')->order('nazev');
     $eol = "\r\n";
     $handle = fopen('safe://' . $soubor, 'w');
@@ -152,11 +152,11 @@ class Skladba extends Nette\Object
     fwrite($handle, '{}' . $eol);
     fwrite($handle, ']' . $eol);
     fclose($handle);
-    }
+  }
 
   /** @return null */
-    public function exportAutoru($soubor)
-    {
+  public function exportAutoru($soubor)
+  {
     $skladby = $this->database->table('skladba')->select('DISTINCT autor')->order('autor');
     $eol = "\r\n";
     $handle = fopen('safe://' . $soubor, 'w');
@@ -167,7 +167,7 @@ class Skladba extends Nette\Object
     fwrite($handle, '""' . $eol);
     fwrite($handle, ']' . $eol);
     fclose($handle);
-    }
+  }
 
     public function stazenoSkladeb()
     {

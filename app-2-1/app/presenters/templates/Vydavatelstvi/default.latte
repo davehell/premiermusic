@@ -6,11 +6,27 @@
 {/block}
 
 {block scripts}
-<script>
-  $(function () {
-    $("[data-toggle='popover']").popover( { trigger: "hover", html: true } );
-  });
-</script>
+  <script src="{$basePath}/js/typeahead.min.js"></script>
+
+  <script>
+    $(function () {
+      $("[data-toggle='popover']").popover( { trigger: "hover", html: true } );
+    });
+
+    $('#frm-hledaniForm-nazev').typeahead({
+      prefetch: {
+        url:  '{$basePath|noescape}/noty-nazev.json'
+      },
+      limit: 10
+    });
+
+    $('#frm-hledaniForm-popis').typeahead({
+      prefetch: {
+        url:  '{$basePath|noescape}/noty-popis.json'
+      },
+      limit: 10
+    });
+  </script>
 {/block}
 
 {block content}
@@ -35,7 +51,7 @@
 
 <div class="row hidden-print">
   <div class="col-sm-6">
-    <div style="padding-top: 0;" class="well">
+    <div id="hledaniForm-wrapper" class="well" style="padding-top: 0;" >
       <h3>Vyhledávání</h3>
       {control hledaniForm}
     </div>

@@ -179,6 +179,9 @@ class VydavatelstviPresenter extends BasePresenter
       }
     }
 
+    $this->vydavatelstvi->exportNazvuNot($this->context->parameters['wwwDir'] . '/noty-nazev.json');
+    $this->vydavatelstvi->exportPopisuNot($this->context->parameters['wwwDir'] . '/noty-popis.json');
+
     $this->flashMessage('Noty byly uloženy.' , 'success');
     $this->redirect('Vydavatelstvi:default');
   }

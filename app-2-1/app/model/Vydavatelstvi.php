@@ -36,49 +36,80 @@ class Vydavatelstvi extends Nette\Object
     return $result;
   }
 
-    /** @return Nette\Database\Table\ActiveRow */
-    public function findById($id)
-    {
-        return $this->findAll()->get($id);
+  /** @return null */
+  public function exportNazvuNot($soubor)
+  {
+    $noty = $this->findAll()->select('nazev');
+    $eol = "\r\n";
+    $handle = fopen('safe://' . $soubor, 'w');
+    fwrite($handle, '[' . $eol);
+    foreach ($noty as $nota) {
+      fwrite($handle, '"' . $nota->nazev . '",' . $eol);
     }
+    fwrite($handle, '""' . $eol);
+    fwrite($handle, ']' . $eol);
+    fclose($handle);
+  }
 
-    public function update($notyId, $values)
-    {
-        $this->database->table('hudba_noty')->wherePrimary($notyId)->update($values);
+  /** @return null */
+  public function exportPopisuNot($soubor)
+  {
+    $noty = $this->database->table('hudba_noty')->select('id,popis')->order('popis');
+    $eol = "\r\n";
+    $handle = fopen('safe://' . $soubor, 'w');
+    fwrite($handle, '[' . $eol);
+    foreach ($noty as $nota) {
+      fwrite($handle, '"' . $nota->popis . '",' . $eol);
     }
+    fwrite($handle, '""' . $eol);
+    fwrite($handle, ']' . $eol);
+    fclose($handle);
+  }
 
   /** @return Nette\Database\Table\ActiveRow */
-    public function insert($cd)
-    {
+  public function findById($id)
+  {
+    return $this->findAll()->get($id);
+  }
+
+  public function update($notyId, $values)
+  {
+    $this->database->table('hudba_noty')->wherePrimary($notyId)->update($values);
+  }
+
+  /** @return Nette\Database\Table\ActiveRow */
+  public function insert($cd)
+  {
     return $this->database->table('hudba_noty')->insert($cd);
-    }
+  }
 
-    public function smazat($notyId)
-    {
+  public function smazat($notyId)
+  {
     $this->database->table('hudba_noty')->wherePrimary($notyId)->delete();
-    }
+  }
 
-    public function demoSkladby()
-    {
+  public function demoSkladby()
+  {
     //format_id 14 = mp3 v?tn?melodick?linky
     return $this->database->table('soubor')->select('skladba.nazev AS nazev, soubor.id')->where('format_id', 14)->order('nazev ASC')->fetchPairs('id', 'nazev');
-    }
+  }
 
-    public function nazevSouboru($id)
-    {
+  public function nazevSouboru($id)
+  {
     return $this->database->table('soubor')->get($id);
-    }
+  }
 
   /** @return array */
-    public function seznamKategorii()
-    {
+  public function seznamKategorii()
+  {
     return $this->database->table('hudba_noty_kategorie')->fetchPairs('id', 'nazev');
-    }
+  }
+
   /** @return array */
-    public function kategorie()
-    {
+  public function kategorie()
+  {
     return $this->database->table('hudba_noty_kategorie');
-    }
+  }
 
   /** @return Nette\Database\Table\Selection */
   public function novinky()
