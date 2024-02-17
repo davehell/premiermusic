@@ -9,7 +9,6 @@ use Nette\Application\Responses\FileResponse,
  */
 class SkladbaPresenter extends BasePresenter
 {
-
   /** @persistent */
   public $nazev;
   /** @persistent */
@@ -25,8 +24,8 @@ class SkladbaPresenter extends BasePresenter
   /** @persistent */
   public $mode;
 
-    /** @var Skladba @inject*/
-    public $skladby;
+  /** @var Skladba @inject*/
+  public $skladby;
   /** @var Uzivatel @inject*/
   public $uzivatele;
   /** @var Kurz @inject*/
@@ -191,15 +190,15 @@ class SkladbaPresenter extends BasePresenter
     $this->redirect('Skladba:katalog', $params);
   }
 
-    public function renderDefault()
-    {
+  public function renderDefault()
+  {
     $this->template->oblibene = $this->skladby->oblibene();
     $this->template->novinky = $this->skladby->novinky();
     $this->template->pocet = $this->skladby->pocetSkladeb();
     $this->template->formaty = $this->skladby->seznamFormatu('plneVerze');
-    }
+  }
 
-    public function renderKatalog($mode = null)
+  public function renderKatalog($mode = null)
   {
     $filtry['nazev'] = $this->getParameter('nazev');
     $filtry['autor'] = $this->getParameter('autor');

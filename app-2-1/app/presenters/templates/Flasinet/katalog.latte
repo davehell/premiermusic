@@ -50,18 +50,18 @@
   <thead>
     <tr>
       <th class="col-md-3"><a n:href="Flasinet:katalog radit => nazev, asc => ($razeniSloupec == 'nazev' && $razeniAsc) ? 0 : 1">název</a>
-      {if $razeniSloupec == 'nazev'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {if $razeniSloupec == 'nazev'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
       <th class="col-md-3"><a n:href="Flasinet:katalog radit => autor, asc => ($razeniSloupec == 'autor' && $razeniAsc) ? 0 : 1">interpret</a>
-      {if $razeniSloupec == 'autor'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {if $razeniSloupec == 'autor'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
       <th><a n:href="Flasinet:katalog radit => cena, asc => ($razeniSloupec == 'cena' && $razeniAsc) ? 0 : 1">cena</a>
-      {if $razeniSloupec == 'cena'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {if $razeniSloupec == 'cena'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
       <th><a n:href="Flasinet:katalog radit => zanr_id, asc => ($razeniSloupec == 'zanr_id' && $razeniAsc) ? 0 : 1">žánr</a>
-      {if $razeniSloupec == 'zanr_id'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {if $razeniSloupec == 'zanr_id'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
       {if $adminMode}
       <th><a n:href="Flasinet:katalog radit => datum_pridani, asc => ($razeniSloupec == 'datum_pridani' && $razeniAsc) ? 0 : 1">přidáno</a>
-      {if $razeniSloupec == 'datum_pridani'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {if $razeniSloupec == 'datum_pridani'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
       <th><a n:href="Flasinet:katalog radit => pocet_stazeni, asc => ($razeniSloupec == 'pocet_stazeni' && $razeniAsc) ? 0 : 1">stažení</a>
-      {if $razeniSloupec == 'pocet_stazeni'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}down{else}up{/if}"></span>{/if}</th>
+      {if $razeniSloupec == 'pocet_stazeni'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
       {/if}
     </tr>
   </thead>
