@@ -147,7 +147,7 @@ class Skladba extends Nette\Object
     $handle = fopen('safe://' . $soubor, 'w');
     fwrite($handle, '[' . $eol);
     foreach ($skladby as $skladba) {
-      fwrite($handle, '{"id":' . $skladba->id . ',"value":"' . $skladba->nazev . '"},' . $eol);
+      fwrite($handle, '{"id":' . $skladba->id . ',"value":"' . trim($skladba->nazev) . '"},' . $eol);
     }
     fwrite($handle, '{}' . $eol);
     fwrite($handle, ']' . $eol);
@@ -162,7 +162,7 @@ class Skladba extends Nette\Object
     $handle = fopen('safe://' . $soubor, 'w');
     fwrite($handle, '[' . $eol);
     foreach ($skladby as $skladba) {
-      fwrite($handle, '"' . $skladba->autor . '",' . $eol);
+      fwrite($handle, '"' . trim($skladba->autor) . '",' . $eol);
     }
     fwrite($handle, '""' . $eol);
     fwrite($handle, ']' . $eol);

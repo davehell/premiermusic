@@ -39,12 +39,12 @@ class Vydavatelstvi extends Nette\Object
   /** @return null */
   public function exportNazvuNot($soubor)
   {
-    $noty = $this->findAll()->select('nazev');
+    $noty = $this->findAll()->select('DISTINCT nazev');
     $eol = "\r\n";
     $handle = fopen('safe://' . $soubor, 'w');
     fwrite($handle, '[' . $eol);
     foreach ($noty as $nota) {
-      fwrite($handle, '"' . $nota->nazev . '",' . $eol);
+      fwrite($handle, '"' . trim($nota->nazev) . '",' . $eol);
     }
     fwrite($handle, '""' . $eol);
     fwrite($handle, ']' . $eol);
@@ -54,12 +54,12 @@ class Vydavatelstvi extends Nette\Object
   /** @return null */
   public function exportPopisuNot($soubor)
   {
-    $noty = $this->database->table('hudba_noty')->select('id,popis')->order('popis');
+    $noty = $this->database->table('hudba_noty')->select('DISTINCT popis');
     $eol = "\r\n";
     $handle = fopen('safe://' . $soubor, 'w');
     fwrite($handle, '[' . $eol);
     foreach ($noty as $nota) {
-      fwrite($handle, '"' . $nota->popis . '",' . $eol);
+      fwrite($handle, '"' . trim($nota->popis) . '",' . $eol);
     }
     fwrite($handle, '""' . $eol);
     fwrite($handle, ']' . $eol);
