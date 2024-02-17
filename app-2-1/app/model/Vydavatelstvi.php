@@ -2,30 +2,39 @@
 
 class Vydavatelstvi extends Nette\Object
 {
-    /** @var Nette\Database\Context */
-    private $database;
+  /** @var Nette\Database\Context */
+  private $database;
 
 
-    public function __construct(Nette\Database\Context $database)
-    {
-        $this->database = $database;
-    }
+  public function __construct(Nette\Database\Context $database)
+  {
+    $this->database = $database;
+  }
 
 
-    /** @return Nette\Database\Table\Selection */
-    public function findAll($kategorie = null, $limit = null, $offset = null)
-    {
+  /** @return Nette\Database\Table\Selection */
+  public function findAll($filtry = null, $razeni = null, $limit = null, $offset = null)
+  {
     $result = $this->database->table('hudba_noty');
 
-    if($kategorie) {
-      $result->where("hudba_noty_kategorie_id", $kategorie);
+    if($filtry['nazev']) {
+      $result = $result->where('nazev LIKE ?', '%' . $filtry['nazev'] . '%');
+    }
+    if($filtry['popis']) {
+      $result = $result->where('popis LIKE ?', '%' . $filtry['popis'] . '%');
+    }
+    if($filtry['kategorie']) {
+      $result = $result->where('hudba_noty_kategorie_id', $filtry['kategorie']);
     }
 
-    $result->order('nazev ASC')
-           ->limit($limit, $offset);
+    if($razeni) {
+      $result = $result->order($razeni['sloupec'] . ' ' . $razeni['smer']);
+    }
+
+    $result->limit($limit, $offset);
 
     return $result;
-    }
+  }
 
     /** @return Nette\Database\Table\ActiveRow */
     public function findById($id)
@@ -70,4 +79,10 @@ class Vydavatelstvi extends Nette\Object
     {
     return $this->database->table('hudba_noty_kategorie');
     }
+
+  /** @return Nette\Database\Table\Selection */
+  public function novinky()
+  {
+    return $this->findAll()->order('id DESC')->limit(10);
+  }
 }

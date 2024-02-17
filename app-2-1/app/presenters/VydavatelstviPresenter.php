@@ -11,9 +11,19 @@ use Nette\Application\Responses\FileResponse,
  */
 class VydavatelstviPresenter extends BasePresenter
 {
+  /** @persistent */
+  public $nazev;
+  /** @persistent */
+  public $popis;
+  /** @persistent */
+  public $kategorie;
+  /** @persistent */
+  public $radit = 'nazev';
+  /** @persistent */
+  public $asc = '1';
 
-    /** @var Vydavatelstvi @inject*/
-    public $vydavatelstvi;
+  /** @var Vydavatelstvi @inject*/
+  public $vydavatelstvi;
 
   /**
    * @return Nette\Application\UI\Form
@@ -107,11 +117,17 @@ class VydavatelstviPresenter extends BasePresenter
   {
     $form = new Nette\Application\UI\Form;
 
-    foreach ($this->vydavatelstvi->seznamKategorii() as $id=>$kategorie) {
-      $form->addCheckbox('kat' . $id, $kategorie);
-    }
+    $form->addText('nazev', 'Název:')
+      ->addRule(Form::MAX_LENGTH, 'Název skladby může mít maximálně %d znaků', 100);
 
-    $form->addSubmit('send', 'Zobrazit vybrané');
+    $form->addText('popis', 'Popis:')
+      ->addRule(Form::MAX_LENGTH, 'Popis může mít maximálně %d znaků', 100);
+
+    $form->addSelect('kategorie', 'Kategorie:', $this->vydavatelstvi->seznamKategorii())
+      ->setPrompt('všechny');
+
+    $form->addSubmit('send', 'Hledat');
+    $form->addSubmit('reset', 'Zrušit filtr');
 
     $form->onSuccess[] = $this->hledaniFormSucceeded;
 
@@ -203,33 +219,45 @@ class VydavatelstviPresenter extends BasePresenter
 
   public function hledaniFormSucceeded($form)
   {
-    $values = $form->getValues();
-    $this->redirect('Vydavatelstvi:default', array("filtr" => $values));
+    if ($form['reset']->isSubmittedBy()) {
+      $params = array('nazev' => null, 'popis' => null, 'kategorie' => null, 'radit' => null, 'asc' => null);
+      $this->redirect('Vydavatelstvi:default', $params);
+    }
+    else {
+      $values = $form->getValues();
+
+      $params = array('nazev' => $values['nazev'], 'popis' => $values['popis'], 'kategorie' => $values['kategorie']);
+      if(!$params['nazev']) $params['nazev'] = null;
+      if(!$params['popis']) $params['popis'] = null;
+      $this->redirect('Vydavatelstvi:default', $params);
+    }
   }
 
-    public function renderDefault()
-    {
+  public function renderDefault()
+  {
     $kategorieVse = $this->vydavatelstvi->kategorie();
 
-    $filtr = $this->getParameter('filtr');
-    $kategorie = array();
-    if($filtr) {
-      $this['hledaniForm']->setDefaults($filtr);
-      foreach ($kategorieVse as $kat) {
-        if($filtr['kat' . $kat->id]) $kategorie[] = $kat->id;
-      }
-    }
+    $filtry['nazev'] = $this->getParameter('nazev');
+    $filtry['popis'] = $this->getParameter('popis');
+    $filtry['kategorie']  = $this->getParameter('kategorie');
+    $this['hledaniForm']->setDefaults($filtry);
+    $razeni['sloupec'] = $this->getParameter('radit');
+    $razeni['smer'] = $this->getParameter('asc') ? 'ASC' : 'DESC';
 
-    $pocetNot = $this->vydavatelstvi->findAll($kategorie)->count();
+    $pocetNot = $this->vydavatelstvi->findAll($filtry)->count();
     $vp = new \VisualPaginator($this, 'vp');
     $paginator = $vp->getPaginator();
     $paginator->itemsPerPage = 50;
     $paginator->itemCount = $pocetNot;
 
-    $noty = $this->vydavatelstvi->findAll($kategorie, $paginator->getLength(), $paginator->getOffset());
+    $noty = $this->vydavatelstvi->findAll($filtry, $razeni, $paginator->getLength(), $paginator->getOffset());
     $this->template->noty = $noty;
+    $this->template->razeniSloupec = $razeni['sloupec'];
+    $this->template->razeniAsc = $this->getParameter('asc');
     $this->template->kategorie = $kategorieVse;
-    }
+
+    $this->template->novinky = $this->vydavatelstvi->novinky();
+  }
 
 
     public function renderDetail($id)

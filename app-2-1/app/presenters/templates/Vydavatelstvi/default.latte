@@ -33,43 +33,39 @@
   Obsazení nástrojů je možne na přání upravit pro jakékoliv hlasy, např. doprovod místo B trubky, pro pozoun, Es trubku apod.
 </p>
 
-{form hledaniForm class => ''}
-    <legend>Filtrování skladeb</legend>
-    <div class="form-group">
-      <label class="col-sm-2 control-label">Kategorie:</label>
-        <div class="col-sm-offset-2">
-      {foreach $kategorie as $kat}
-        <label class="checkbox-inline">
-          <input n:name="kat{$kat->id}:" /> {$kat->nazev}
-          <span class="glyphicon glyphicon-question-sign" data-toggle="popover" title="{$kat->nazev} - obsazení" data-content="{$kat->obsazeni}"></span>
-        </label><br>
-      {/foreach}
-      </div>
+<div class="row hidden-print">
+  <div class="col-sm-6">
+    <div style="padding-top: 0;" class="well">
+      <h3>Vyhledávání</h3>
+      {control hledaniForm}
     </div>
+  </div>
+  <div class="col-sm-6">
 
-    <div class="form-group">
-      <div class="col-sm-offset-2">
-        {input 'send'}
-        <a n:href="Vydavatelstvi:" class="btn btn-primary">Zobrazit vše</a>
-      </div>
-    </div>
-{/form hledaniForm}
+      <h3>Novinky</h3>
+      <ul n:inner-foreach="$novinky as $nota">
+        <li><a n:href="Vydavatelstvi:detail $nota->id">{$nota->nazev}</a></li>
+      </ul>
+
+  </div>
+</div>
 
 {if $noty->count()}
   {control vp}
   <table class="table table-striped table-hover vydavatelstvi">
     <thead>
       <tr>
-        <th>Ćíslo</th>
-        <th>Název</th>
-        <th>Popis</th>
+        <th><a n:href="Vydavatelstvi:default radit => nazev, asc => ($razeniSloupec == 'nazev' && $razeniAsc) ? 0 : 1">Nnázev</a>
+        {if $razeniSloupec == 'nazev'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
+        <th><a n:href="Vydavatelstvi:default radit => popis, asc => ($razeniSloupec == 'popis' && $razeniAsc) ? 0 : 1">Popis</a>
+        {if $razeniSloupec == 'popis'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
         <th>Kategorie</th>
-        <th>Cena</th>
+        <th><a n:href="Vydavatelstvi:default radit => cena, asc => ($razeniSloupec == 'cena' && $razeniAsc) ? 0 : 1">Cena</a>
+        {if $razeniSloupec == 'cena'}<span class="glyphicon glyphicon-arrow-{if $razeniAsc}up{else}down{/if}"></span>{/if}</th>
       </tr>
     </thead>
     <tbody>
       <tr n:foreach="$noty as $nota">
-        <td>{$nota->id}</td>
         <td>
           <div class="buttons">
             <a n:if="$nota->foto" href="{$basePath}/img/data/vydavatelstvi/{$nota->foto}" class="btn btn-primary" data-lightbox="group{$nota->id}" title="Zobrazit ukázku not"><span class="glyphicon glyphicon-music"></span></a>
@@ -85,6 +81,6 @@
   </table>
 {else}
   <p>
-    Nejsou uloženy žádné noty.
+    Zadánemu filtru neodpovídají žádné noty
   </p>
 {/if}
